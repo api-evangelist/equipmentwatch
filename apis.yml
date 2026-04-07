@@ -11,8 +11,8 @@ image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Construction
   - Equipment
-  - Valuation
   - Rental Rates
+  - Valuation
 url: >-
   https://raw.githubusercontent.com/api-evangelist/equipmentwatch/refs/heads/main/apis.yml
 created: '2026-03-16'
