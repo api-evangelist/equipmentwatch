@@ -123,6 +123,12 @@ common:
     url: https://www.equipmentwatch.com/
   - type: APIs
     url: https://www.equipmentwatch.com/api/
+  - type: Integrations
+    url: https://equipmentwatch.com/integrations/
+integrations:
+  - name: By Fusable
+  - name: EquipmentWatch
+  - name: LinkedIn Pixel
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
