@@ -119,6 +119,8 @@ apis:
       - type: Documentation
         url: https://www.equipmentwatch.com/api/
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/equipmentwatch
   - type: Website
     url: https://www.equipmentwatch.com/
   - type: APIs
