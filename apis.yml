@@ -9,7 +9,7 @@ description: >-
 type: Index
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Construction
   - Equipment
@@ -29,7 +29,7 @@ apis:
       model database, covering the taxonomy used across the broader API suite
       for construction and heavy equipment.
     humanURL: https://www.equipmentwatch.com/api/
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Taxonomy
       - Manufacturers
@@ -43,7 +43,7 @@ apis:
       Access to the industry's most comprehensive database of rich machine
       specifications for construction and heavy equipment.
     humanURL: https://www.equipmentwatch.com/api/
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Specifications
       - Equipment
@@ -56,7 +56,7 @@ apis:
       Serial number verification API supporting approximately 30,000 models of
       construction and heavy equipment.
     humanURL: https://www.equipmentwatch.com/api/
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Verification
       - Serial Numbers
@@ -69,7 +69,7 @@ apis:
       Ownership and operating cost recovery rates derived from the Rental Rate
       Blue Book, supporting equipment cost benchmarking and rate calculation.
     humanURL: https://www.equipmentwatch.com/api/
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Costs
       - Ownership Costs
@@ -83,7 +83,7 @@ apis:
       Current market values and pricing data for heavy equipment, supporting
       valuation, appraisal, and resale pricing workflows.
     humanURL: https://www.equipmentwatch.com/api/
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Valuation
       - Market Values
@@ -97,7 +97,7 @@ apis:
       National, regional, and rental-house specific equipment rental rates,
       supporting rate optimization for rental fleets and customers.
     humanURL: https://www.equipmentwatch.com/api/
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Rental Rates
       - Retail
@@ -110,7 +110,7 @@ apis:
       Raw equipment sales activity and market-derived utilization benchmarks
       for the heavy equipment industry.
     humanURL: https://www.equipmentwatch.com/api/
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Market Data
       - Sales
