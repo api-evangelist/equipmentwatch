@@ -119,6 +119,8 @@ apis:
       - type: Documentation
         url: https://www.equipmentwatch.com/api/
 common:
+  - type: DomainSecurity
+    url: security/equipmentwatch-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/equipmentwatch
   - type: Website
@@ -127,6 +129,8 @@ common:
     url: https://www.equipmentwatch.com/api/
   - type: Integrations
     url: https://equipmentwatch.com/integrations/
+  - url: https://www.equipmentwatch.com/blog/feed/
+    type: Blog
 integrations:
   - name: By Fusable
   - name: EquipmentWatch
