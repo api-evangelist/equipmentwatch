@@ -1,0 +1,73 @@
+generated: '2026-09-06'
+method: generated
+source: >-
+  Packaged Agent Skills authored by API Evangelist over the EquipmentWatch OpenAPI harvested
+  from https://docs.equipmentwatchapi.com/openapi.yaml on 2026-09-06. EquipmentWatch publishes
+  no skills, AGENTS.md or agent documentation of its own — searched 2026-09-06, none found.
+provider: Equipmentwatch
+providerId: equipmentwatch
+description: >-
+  Agent Skills for the three marquee EquipmentWatch flows: valuing an asset, verifying a serial
+  number, and pricing cost recovery. Each is grounded in real published paths from the OpenAPI.
+  IMPORTANT: the source spec declares no operationIds on any of its 24 operations, so every
+  skill references the real METHOD and PATH instead. An operationId in these skills would have
+  been invented; a path is what the provider actually published.
+
+skills:
+  - name: equipmentwatch-value-an-asset
+    file: equipmentwatch-value-an-asset.md
+    api: equipmentwatch:values
+    summary: >-
+      Resolve manufacturer and model to a modelRdbId, then retrieve FMV / FLV / OLV for a year,
+      condition and region, and optionally trend it.
+    operations:
+      - GET /taxonomy/manufacturers
+      - GET /taxonomy/models
+      - GET /values/condition
+      - GET /values/region
+      - GET /values/value
+      - GET /values/trending
+  - name: equipmentwatch-verify-serial-number
+    file: equipmentwatch-verify-serial-number.md
+    api: equipmentwatch:verification
+    summary: >-
+      Verify year of manufacture from a serial number, surface the serial range behind the
+      answer, reconcile against the counterparty's claim, and re-value on the verified facts.
+    operations:
+      - GET /verification/serialnumberverification
+      - GET /taxonomy/models
+      - GET /values/value
+  - name: equipmentwatch-cost-recovery-rate
+    file: equipmentwatch-cost-recovery-rate.md
+    api: equipmentwatch:costs
+    summary: >-
+      Select a build configuration, pull Blue Book ownership and operating cost recovery rates
+      plus the FHWA rate, derive an internal charge rate, and compare against retail rental.
+    operations:
+      - GET /taxonomy/models
+      - GET /cost/configurations
+      - GET /cost/cost-recovery
+      - GET /cost/icr
+      - GET /rental/rentalrates
+
+shared_rules:
+  - Base URL https://equipmentwatchapi.com/v1; sandbox https://sandbox.equipmentwatchapi.com/v1.
+  - Every request carries x-api-key. Keys are sales-issued; there is no self-service signup.
+  - Pagination is offset/limit with a hard limit of 50 and no total count in the response.
+  - Error envelope is {errorCode, errorMessage, errorDescription} — not RFC 9457. Unmatched
+    routes return HTML, not JSON.
+  - No rate-limit headers are emitted. Self-throttle.
+  - The published API is entirely read-only, so idempotency and reversibility are `na`.
+  - No response schemas are published; treat every response field as optional.
+
+not_covered:
+  - name: Market Data
+    reason: >-
+      Documented at https://equipmentwatch.com/api/market-data/ but carries no paths in the
+      published OpenAPI. No skill is authored over paths that were never published.
+  - name: Integration (saved models and groups)
+    reason: >-
+      Documented at https://equipmentwatch.com/api/integration/ with POST operations, but absent
+      from the published OpenAPI. It is the only write surface EquipmentWatch describes, and
+      writing a skill for undocumented write operations — with no known idempotency or reversal
+      semantics — would be the exact fabrication this pipeline forbids.

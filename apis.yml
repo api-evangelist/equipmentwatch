@@ -1,11 +1,16 @@
 aid: equipmentwatch
 name: Equipmentwatch
 description: >-
-  EquipmentWatch (a Fusable brand) provides construction and equipment data
-  APIs that deliver rental rates, ownership costs, market values, and
-  specifications for heavy equipment. Their data is used by contractors,
-  equipment dealers, rental houses, and insurance professionals to make
-  informed decisions about equipment valuation, procurement, and rental.
+  EquipmentWatch (a Fusable brand, operated by Randall-Reilly, LLC) provides construction and
+  equipment data APIs that deliver rental rates, ownership and operating costs, market values,
+  machine specifications, serial-number verification and raw market transaction data for heavy
+  equipment. Their data is used by contractors, equipment dealers, rental houses, lenders and
+  insurance professionals to make informed decisions about equipment valuation, procurement,
+  cost recovery and rental rate setting. The EquipmentWatch API is published as a single
+  OpenAPI 3.0.3 contract at docs.equipmentwatchapi.com covering the Taxonomy, Values,
+  Specifications, Rental, Verification, Cost and Bulk surfaces, served from
+  equipmentwatchapi.com with a documented sandbox host, and authenticated with an x-api-key
+  header issued through a request-an-API-key form.
 type: Index
 deliveryModel:
   model: unknown
@@ -19,18 +24,19 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 accessModel:
-  pricing: freemium
-  onboarding: unknown
+  pricing: unknown
+  onboarding: request-access
   trial: false
   try_now: false
   public: false
-  label: Freemium
+  label: Request access — API key issued via a HubSpot form; no published API pricing
   confidence: medium
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
-position: Consuming
+  - https://equipmentwatch.com/api/
+  generated: '2026-09-06'
+  method: searched
+position: Producing
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/equipmentwatch.png
 tags:
@@ -39,10 +45,12 @@ tags:
   - Rental Rates
   - Valuation
   - Heavy Equipment
+  - Equipment Data
+  - Market Data
 url: >-
   https://raw.githubusercontent.com/api-evangelist/equipmentwatch/refs/heads/main/apis.yml
 created: '2026-03-16'
-modified: '2026-04-28'
+modified: '2026-09-06'
 specificationVersion: '0.23'
 apis:
   - aid: equipmentwatch:taxonomy
@@ -50,8 +58,10 @@ apis:
     description: >-
       Foundational API providing access to EquipmentWatch's manufacturer and
       model database, covering the taxonomy used across the broader API suite
-      for construction and heavy equipment.
-    humanURL: https://www.equipmentwatch.com/api/
+      for construction and heavy equipment. Published operations cover
+      classifications, categories, subtypes, sizes, manufacturers and models.
+    humanURL: https://equipmentwatch.com/api/taxonomy/
+    baseURL: https://equipmentwatchapi.com/v1
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Taxonomy
@@ -59,39 +69,58 @@ apis:
       - Models
     properties:
       - type: Documentation
-        url: https://www.equipmentwatch.com/api/
+        url: https://equipmentwatch.com/api/taxonomy/
+      - type: OpenAPI
+        url: openapi/equipmentwatch-api-openapi.yaml
+      - type: APIReference
+        url: https://docs.equipmentwatchapi.com/
   - aid: equipmentwatch:specs
     name: EquipmentWatch Specs API
     description: >-
       Access to the industry's most comprehensive database of rich machine
-      specifications for construction and heavy equipment.
-    humanURL: https://www.equipmentwatch.com/api/
+      specifications for construction and heavy equipment, covering more than
+      33,000 models, parsed into spec families including weights and
+      dimensions, engine, hydraulics, axles and tires, and fluid capacities.
+    humanURL: https://equipmentwatch.com/api/specs/
+    baseURL: https://equipmentwatchapi.com/v1
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Specifications
       - Equipment
     properties:
       - type: Documentation
-        url: https://www.equipmentwatch.com/api/
+        url: https://equipmentwatch.com/api/specs/
+      - type: OpenAPI
+        url: openapi/equipmentwatch-api-openapi.yaml
+      - type: APIReference
+        url: https://docs.equipmentwatchapi.com/
   - aid: equipmentwatch:verification
     name: EquipmentWatch Verification API
     description: >-
       Serial number verification API supporting approximately 30,000 models of
-      construction and heavy equipment.
-    humanURL: https://www.equipmentwatch.com/api/
+      construction and heavy equipment, returning year of manufacture from a
+      supplied serial number along with manufacturer interpretation notes.
+    humanURL: https://equipmentwatch.com/api/verification/
+    baseURL: https://equipmentwatchapi.com/v1
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Verification
       - Serial Numbers
     properties:
       - type: Documentation
-        url: https://www.equipmentwatch.com/api/
+        url: https://equipmentwatch.com/api/verification/
+      - type: OpenAPI
+        url: openapi/equipmentwatch-api-openapi.yaml
+      - type: APIReference
+        url: https://docs.equipmentwatchapi.com/
   - aid: equipmentwatch:costs
     name: EquipmentWatch Costs API
     description: >-
       Ownership and operating cost recovery rates derived from the Rental Rate
-      Blue Book, supporting equipment cost benchmarking and rate calculation.
-    humanURL: https://www.equipmentwatch.com/api/
+      Blue Book, supporting equipment cost benchmarking, internal charge rate
+      calculation and FHWA rate lookup.
+    humanURL: https://equipmentwatch.com/api/costs/
+    baseURL: https://equipmentwatchapi.com/v1
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Costs
@@ -99,13 +128,20 @@ apis:
       - Rental Rates
     properties:
       - type: Documentation
-        url: https://www.equipmentwatch.com/api/
+        url: https://equipmentwatch.com/api/costs/
+      - type: OpenAPI
+        url: openapi/equipmentwatch-api-openapi.yaml
+      - type: APIReference
+        url: https://docs.equipmentwatchapi.com/
   - aid: equipmentwatch:values
     name: EquipmentWatch Values API
     description: >-
-      Current market values and pricing data for heavy equipment, supporting
-      valuation, appraisal, and resale pricing workflows.
-    humanURL: https://www.equipmentwatch.com/api/
+      Current and trended market values for heavy equipment — Fair Market Value
+      (FMV), Forced Liquidation Value (FLV) and Orderly Liquidation Value (OLV)
+      — supporting valuation, appraisal and resale pricing workflows, with
+      adjustment for condition, options and extras, and region.
+    humanURL: https://equipmentwatch.com/api/values/
+    baseURL: https://equipmentwatchapi.com/v1
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Valuation
@@ -113,26 +149,40 @@ apis:
       - Pricing
     properties:
       - type: Documentation
-        url: https://www.equipmentwatch.com/api/
+        url: https://equipmentwatch.com/api/values/
+      - type: OpenAPI
+        url: openapi/equipmentwatch-api-openapi.yaml
+      - type: APIReference
+        url: https://docs.equipmentwatchapi.com/
   - aid: equipmentwatch:retail-rental
     name: EquipmentWatch Retail Rental API
     description: >-
-      National, regional, and rental-house specific equipment rental rates,
-      supporting rate optimization for rental fleets and customers.
-    humanURL: https://www.equipmentwatch.com/api/
+      National, regional and rental-house specific equipment rental rates for
+      thousands of models across nearly every equipment rental house in North
+      America, supporting rate optimization for rental fleets and customers.
+    humanURL: https://equipmentwatch.com/api/rental/
+    baseURL: https://equipmentwatchapi.com/v1
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Rental Rates
       - Retail
     properties:
       - type: Documentation
-        url: https://www.equipmentwatch.com/api/
+        url: https://equipmentwatch.com/api/rental/
+      - type: OpenAPI
+        url: openapi/equipmentwatch-api-openapi.yaml
+      - type: APIReference
+        url: https://docs.equipmentwatchapi.com/
   - aid: equipmentwatch:market-data
     name: EquipmentWatch Market Data API
     description: >-
-      Raw equipment sales activity and market-derived utilization benchmarks
-      for the heavy equipment industry.
-    humanURL: https://www.equipmentwatch.com/api/
+      Raw equipment sales activity (auction and resale transactions) and
+      market-derived utilization and popularity benchmarks for the heavy
+      equipment industry. Documented on the EquipmentWatch site but NOT
+      represented in the published OpenAPI contract, which carries no
+      market-data paths as of 2026-09-06.
+    humanURL: https://equipmentwatch.com/api/market-data/
+    baseURL: https://equipmentwatchapi.com/v1
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Market Data
@@ -140,20 +190,81 @@ apis:
       - Utilization
     properties:
       - type: Documentation
-        url: https://www.equipmentwatch.com/api/
+        url: https://equipmentwatch.com/api/market-data/
+  - aid: equipmentwatch:integration
+    name: EquipmentWatch Integration API
+    description: >-
+      Read and write access to user-saved asset and group data inside the
+      EquipmentWatch application, allowing saved models and groups to be moved
+      into and out of third-party platforms. The only EquipmentWatch surface
+      with documented write operations (POST saved models, POST groups).
+      Documented on the EquipmentWatch site but NOT represented in the
+      published OpenAPI contract as of 2026-09-06.
+    humanURL: https://equipmentwatch.com/api/integration/
+    baseURL: https://equipmentwatchapi.com/v1
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+    tags:
+      - Integration
+      - Saved Models
+      - Groups
+    properties:
+      - type: Documentation
+        url: https://equipmentwatch.com/api/integration/
 common:
-  - type: DomainSecurity
-    url: security/equipmentwatch-domain-security.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/equipmentwatch
   - type: Website
     url: https://www.equipmentwatch.com/
-  - type: APIs
-    url: https://www.equipmentwatch.com/api/
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/equipmentwatch
+  - type: DeveloperPortal
+    url: https://equipmentwatch.com/api/
+  - type: Documentation
+    url: https://docs.equipmentwatchapi.com/
+  - type: APIReference
+    url: https://docs.equipmentwatchapi.com/
   - type: Integrations
     url: https://equipmentwatch.com/integrations/
-  - url: https://www.equipmentwatch.com/blog/feed/
-    type: Blog
+  - type: Blog
+    url: https://equipmentwatch.com/blog/feed/
+  - type: Support
+    url: https://equipmentwatch.com/contact-us/
+  - type: SignUp
+    url: https://share.hsforms.com/12W-aoSkmR5eYntgAyyiPsAqjl7f
+  - type: Login
+    url: https://app.equipmentwatch.com/
+  - type: TermsOfService
+    url: https://equipmentwatch.com/legal/terms-of-service/
+  - type: PrivacyPolicy
+    url: https://equipmentwatch.com/legal/website-terms-and-privacy-notice/
+  - type: Authentication
+    url: authentication/equipmentwatch-authentication.yml
+  - type: Conventions
+    url: conventions/equipmentwatch-conventions.yml
+  - type: Conformance
+    url: conformance/equipmentwatch-conformance.yml
+  - type: ErrorCatalog
+    url: errors/equipmentwatch-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/equipmentwatch-lifecycle.yml
+  - type: DataModel
+    url: data-model/equipmentwatch-data-model.yml
+  - type: Sandbox
+    url: sandbox/equipmentwatch-sandbox.yml
+  - type: Overlay
+    url: overlays/equipmentwatch-api-overlay.yaml
+  - type: MCPServer
+    url: mcp/equipmentwatch-mcp.yml
+  - type: LLMsTxt
+    url: llms/equipmentwatch-llms.txt
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Plans
+    url: plans/equipmentwatch-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/equipmentwatch-rate-limits.yml
+  - type: DomainSecurity
+    url: security/equipmentwatch-domain-security.yml
+  - type: FinOps
+    url: finops/equipmentwatch-finops.yml
 integrations:
   - name: By Fusable
   - name: EquipmentWatch
@@ -161,3 +272,8 @@ integrations:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-06'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v3

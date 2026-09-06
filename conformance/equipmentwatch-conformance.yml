@@ -1,0 +1,130 @@
+generated: '2026-09-06'
+method: derived
+source: >-
+  Derived from the published OpenAPI 3.0.3 at https://docs.equipmentwatchapi.com/openapi.yaml
+  and from live probes of https://equipmentwatchapi.com/v1/ (2026-09-06). Docs and site were
+  searched for compliance and standards claims; none were found.
+provider: Equipmentwatch
+providerId: equipmentwatch
+description: >-
+  Cross-cutting and domain-standard conformance assertions for the EquipmentWatch API.
+  Every entry carries evidence. Entries with conforms:false are honest negatives, not
+  penalties — they record what an integrator will and will not find.
+
+conformance:
+  - id: openapi-3.0
+    name: OpenAPI Specification 3.0.3
+    conforms: true
+    evidence: >-
+      https://docs.equipmentwatchapi.com/openapi.yaml declares `openapi: 3.0.3`, parses
+      cleanly, and carries 24 operations across 24 paths with a components/parameters
+      library of 23 reusable parameters.
+  - id: https-only
+    name: TLS-only transport
+    conforms: true
+    evidence: >-
+      Both declared servers are https. equipmentwatchapi.com returns
+      strict-transport-security: max-age=15552000; includeSubDomains (observed 2026-09-06).
+  - id: api-key-header-auth
+    name: API key in a request header (not a query string)
+    conforms: true
+    evidence: >-
+      components/securitySchemes declares a single scheme, type apiKey, in: header,
+      name: x-api-key, applied globally via a root-level security block. Keys are never
+      placed in a URL, so they do not leak into logs or referrers.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: false
+    evidence: >-
+      No oauth2 or openIdConnect securityScheme in the spec; /.well-known/oauth-authorization-server
+      and /.well-known/openid-configuration return 404 on equipmentwatchapi.com and
+      equipmentwatch.com (probed 2026-09-06). Authorization is a single static shared key.
+  - id: oidc
+    name: OpenID Connect
+    conforms: false
+    evidence: /.well-known/openid-configuration returns 404 on every known host (probed 2026-09-06).
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      Live 401 returns content-type application/json; charset=utf-8 with a vendor envelope
+      {errorCode, errorMessage, errorDescription} — no type/title/status/detail/instance
+      members and no application/problem+json media type. See errors/equipmentwatch-problem-types.yml.
+  - id: pagination
+    name: Documented pagination
+    conforms: true
+    partial: true
+    evidence: >-
+      offsetParam and limitParam are declared as reusable components with defaults (offset 0,
+      limit 50) and a documented maximum of 50. REQUEST-side pagination is documented;
+      RESPONSE-side is not — no total count, has_more or next link is specified, because
+      the spec declares no response schemas at all.
+  - id: idempotency
+    name: Idempotency-Key replay protection
+    conforms: na
+    evidence: >-
+      Not applicable. All 24 published operations are GET; the contract has no mutating
+      surface for an idempotency key to protect. See conventions/equipmentwatch-conventions.yml.
+  - id: rfc8594-sunset
+    name: RFC 8594 Sunset / Deprecation headers
+    conforms: false
+    evidence: >-
+      No Sunset or Deprecation header observed on live responses; no operation in the spec
+      carries `deprecated: true`; no deprecation policy is published. See lifecycle/.
+  - id: cors
+    name: Cross-Origin Resource Sharing
+    conforms: true
+    evidence: 'access-control-allow-origin: * observed on https://equipmentwatchapi.com/v1/ responses (2026-09-06).'
+  - id: json-api
+    name: 'JSON:API'
+    conforms: false
+    evidence: Responses are plain vendor JSON; no JSON:API document structure or media type is used.
+  - id: odata
+    name: OData
+    conforms: false
+    evidence: No $metadata surface; filtering uses bespoke query parameters, not OData system query options.
+  - id: scim
+    name: SCIM
+    conforms: false
+    evidence: No identity-provisioning surface; no urn:ietf:params:scim schema URNs anywhere in the spec.
+  - id: asyncapi
+    name: AsyncAPI / event surface
+    conforms: false
+    evidence: >-
+      No webhooks, no streaming endpoint, no event catalog, and no AsyncAPI document found
+      on any host. EquipmentWatch is a request/response data API only.
+
+domain_standard:
+  assessed: true
+  standard: null
+  conforms: false
+  note: >-
+    The construction- and heavy-equipment-data market has no widely adopted machine-readable
+    interchange standard that this contract could declare, and EquipmentWatch declares none.
+    What it does carry is a proprietary but internally consistent identifier scheme — the
+    Rental Rate Blue Book / RDB id family (modelRdbId, manufacturerRdbId, categoryRdbId,
+    equipmentSubtypeRdbId, equipmentSubtypeSizeRdbId) — which functions as the de facto
+    reference taxonomy for equipment valuation in North America and is what integrators
+    key against. It is a vendor identifier system, not a published standard, so no
+    domain_standard_conformance credit is claimed. This slot is reward-only; recording
+    a real absence is the correct outcome, not a penalty.
+  candidate_identifier_scheme:
+    name: EquipmentWatch / Rental Rate Blue Book RDB identifiers
+    fields: [modelRdbId, manufacturerRdbId, categoryRdbId, equipmentSubtypeRdbId, equipmentSubtypeSizeRdbId, sizeId, classificationId]
+    published_registry: false
+    evidence: >-
+      Present throughout the spec parameter library and in every response example on
+      https://equipmentwatch.com/api/taxonomy/, /values/, /costs/, /rental/, /verification/
+      and /market-data/.
+
+compliance_claims:
+  found: false
+  searched:
+    - https://equipmentwatch.com/legal/terms-of-service/
+    - https://equipmentwatch.com/legal/website-terms-and-privacy-notice/
+    - https://fusable.com/integrations-apis/
+  note: >-
+    No SOC 2, ISO 27001, PCI DSS, HIPAA or FedRAMP attestation is published on either the
+    EquipmentWatch or Fusable surface, and probe-security-programs.py found no trust
+    center and no vulnerability disclosure programme (vdp=none trust=none, 2026-09-06).
+    No `Compliance` pointer is emitted.

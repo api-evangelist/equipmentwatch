@@ -1,0 +1,78 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  servers[] in the published OpenAPI at https://docs.equipmentwatchapi.com/openapi.yaml,
+  confirmed by a live probe of https://sandbox.equipmentwatchapi.com/v1/taxonomy/categories
+  on 2026-09-06.
+provider: Equipmentwatch
+providerId: equipmentwatch
+description: >-
+  EquipmentWatch publishes a named sandbox host in its OpenAPI servers[] block. The host
+  resolves, terminates TLS and answers the same routes as production with the same
+  authentication challenge. It is a real, reachable, separately-addressed test
+  environment — a genuinely uncommon thing to find in this market segment.
+
+modes:
+  - name: production
+    base_url: https://equipmentwatchapi.com/v1
+    server_description: Primary
+    probed:
+      url: https://equipmentwatchapi.com/v1/taxonomy/categories
+      status: 401
+      body: '{"errorCode":10,"errorMessage":"Invalid API Key","errorDescription":"API Key Provided is invalid"}'
+  - name: sandbox
+    base_url: https://sandbox.equipmentwatchapi.com/v1
+    server_description: Sandbox
+    probed:
+      url: https://sandbox.equipmentwatchapi.com/v1/taxonomy/categories
+      status: 401
+      body: '{"errorCode":10,"errorMessage":"Invalid API Key","errorDescription":"API Key Provided is invalid"}'
+    note: >-
+      Routes and error envelope are identical to production. Switching environments is a
+      hostname change only — same /v1 path prefix, same x-api-key header, same operations.
+
+credentials:
+  separation_mechanism: separate host
+  key_prefixes: null
+  test_vs_live_key_convention: undocumented
+  note: >-
+    EquipmentWatch separates test from live by HOSTNAME, not by key prefix. Nothing in
+    the docs or in an unauthenticated response says whether a production key works against
+    the sandbox host, whether sandbox keys are issued separately, or how a client would
+    tell one from the other at rest. That is the open question a new integrator hits
+    first. No key format is recorded here because none is published — see the no-fabrication
+    rule; inventing a prefix would be worse than the gap.
+
+test_data:
+  published_fixtures: false
+  note: >-
+    No test cards, seed models, fixture serial numbers or sample account are published.
+    The per-API pages on equipmentwatch.com do carry real-looking response examples
+    (e.g. Caterpillar 120M, modelRdbId 31669; Dynapac CA121PDB, serial 60311270) which
+    can be used as reference identifiers when reading the docs, but they are illustrative
+    payloads on a marketing page, not a documented fixture set, and are recorded as such.
+
+time_simulation:
+  supported: false
+  note: >-
+    No test clock or time-travel facility. The Costs surface does accept a `date`
+    parameter (cost revision date, YYYY-MM-DD) which lets a caller pin a historical
+    revision — that is data selection, not time simulation.
+
+tooling:
+  cli: null
+  triggers: null
+  webhook_replay: null
+  interactive_console:
+    url: https://docs.equipmentwatchapi.com/
+    engine: RapiDoc
+    try_it_enabled: unknown
+    note: >-
+      The reference is rendered by RapiDoc, which ships a Try-It console. Because the
+      spec declares servers[] including the sandbox, a key holder can exercise calls from
+      the docs page directly. Without a key this could not be confirmed end to end.
+
+gaps:
+  - No documented way to obtain a sandbox key.
+  - No documented data differences between sandbox and production.
+  - No stated sandbox rate limits or data-freshness guarantees.

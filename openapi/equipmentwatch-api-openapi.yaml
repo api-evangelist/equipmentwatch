@@ -1,0 +1,975 @@
+openapi: 3.0.3
+info:
+  title: EquipmentWatch API
+  version: 1.0.0
+  description: |
+    The EquipmentWatch API enables integration of critical equipment data attributes - including 
+    cost, rental, specs and value benchmarks - directly into any software or application.
+  contact:
+    url: "https://equipmentwatch.com/api/"
+    email: customerservice@equipmentwatch.com
+paths:
+  /taxonomy/classifications:
+    get:
+      summary: Classifications
+      description: Classifications
+      tags:
+        - Taxonomy
+      parameters:
+        - $ref: "#/components/parameters/classificationIdParam"
+        - $ref: "#/components/parameters/classificationParam"
+        - $ref: "#/components/parameters/categoryIdParam"
+        - $ref: "#/components/parameters/categoryParam"
+        - $ref: "#/components/parameters/subtypeIdParam"
+        - $ref: "#/components/parameters/subtypeParam"
+        - $ref: "#/components/parameters/sizeClassIdParam"
+        - $ref: "#/components/parameters/sizeParam"
+        - $ref: "#/components/parameters/manufacturerIdParam"
+        - $ref: "#/components/parameters/manufacturerParam"
+        - $ref: "#/components/parameters/modelIdParam"
+        - $ref: "#/components/parameters/modelParam"
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /taxonomy/categories:
+    get:
+      tags:
+        - Taxonomy
+      summary: Categories
+      description: Categories
+      parameters:
+        - $ref: "#/components/parameters/classificationIdParam"
+        - $ref: "#/components/parameters/classificationParam"
+        - $ref: "#/components/parameters/categoryIdParam"
+        - $ref: "#/components/parameters/categoryParam"
+        - $ref: "#/components/parameters/subtypeIdParam"
+        - $ref: "#/components/parameters/subtypeParam"
+        - $ref: "#/components/parameters/sizeClassIdParam"
+        - $ref: "#/components/parameters/sizeParam"
+        - $ref: "#/components/parameters/manufacturerIdParam"
+        - $ref: "#/components/parameters/manufacturerParam"
+        - $ref: "#/components/parameters/modelIdParam"
+        - $ref: "#/components/parameters/modelParam"
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /taxonomy/subtypes:
+    get:
+      tags:
+        - Taxonomy
+      summary: Subtypes
+      description: Subtypes
+      parameters:
+        - $ref: "#/components/parameters/classificationIdParam"
+        - $ref: "#/components/parameters/classificationParam"
+        - $ref: "#/components/parameters/categoryIdParam"
+        - $ref: "#/components/parameters/categoryParam"
+        - $ref: "#/components/parameters/subtypeIdParam"
+        - $ref: "#/components/parameters/subtypeParam"
+        - $ref: "#/components/parameters/sizeClassIdParam"
+        - $ref: "#/components/parameters/sizeParam"
+        - $ref: "#/components/parameters/manufacturerIdParam"
+        - $ref: "#/components/parameters/manufacturerParam"
+        - $ref: "#/components/parameters/modelIdParam"
+        - $ref: "#/components/parameters/modelParam"
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /taxonomy/sizes:
+    get:
+      tags:
+        - Taxonomy
+      summary: Sizes
+      description: Sizes
+      parameters:
+        - $ref: "#/components/parameters/classificationIdParam"
+        - $ref: "#/components/parameters/classificationParam"
+        - $ref: "#/components/parameters/categoryIdParam"
+        - $ref: "#/components/parameters/categoryParam"
+        - $ref: "#/components/parameters/subtypeIdParam"
+        - $ref: "#/components/parameters/subtypeParam"
+        - $ref: "#/components/parameters/sizeClassIdParam"
+        - $ref: "#/components/parameters/sizeParam"
+        - $ref: "#/components/parameters/manufacturerIdParam"
+        - $ref: "#/components/parameters/manufacturerParam"
+        - $ref: "#/components/parameters/modelIdParam"
+        - $ref: "#/components/parameters/modelParam"
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /taxonomy/manufacturers:
+    get:
+      tags:
+        - Taxonomy
+      summary: Manufacturers
+      description: Manufacturers
+      parameters:
+        - $ref: "#/components/parameters/classificationIdParam"
+        - $ref: "#/components/parameters/classificationParam"
+        - $ref: "#/components/parameters/categoryIdParam"
+        - $ref: "#/components/parameters/categoryParam"
+        - $ref: "#/components/parameters/subtypeIdParam"
+        - $ref: "#/components/parameters/subtypeParam"
+        - $ref: "#/components/parameters/sizeClassIdParam"
+        - $ref: "#/components/parameters/sizeParam"
+        - $ref: "#/components/parameters/manufacturerIdParam"
+        - $ref: "#/components/parameters/manufacturerParam"
+        - $ref: "#/components/parameters/modelIdParam"
+        - $ref: "#/components/parameters/modelParam"
+        - schema:
+            type: string
+          in: query
+          name: partialMatch
+          description: Partial match manufacturer and model name searches.
+          required: false
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /taxonomy/models:
+    get:
+      tags:
+        - Taxonomy
+      summary: Models
+      description: Models
+      parameters:
+        - $ref: "#/components/parameters/classificationIdParam"
+        - $ref: "#/components/parameters/classificationParam"
+        - $ref: "#/components/parameters/categoryIdParam"
+        - $ref: "#/components/parameters/categoryParam"
+        - $ref: "#/components/parameters/subtypeIdParam"
+        - $ref: "#/components/parameters/subtypeParam"
+        - $ref: "#/components/parameters/sizeClassIdParam"
+        - $ref: "#/components/parameters/sizeParam"
+        - $ref: "#/components/parameters/manufacturerIdParam"
+        - $ref: "#/components/parameters/manufacturerParam"
+        - $ref: "#/components/parameters/modelIdParam"
+        - $ref: "#/components/parameters/modelParam"
+        - schema:
+            type: boolean
+          in: query
+          name: partialMatch
+          description: Partial match manufacturer and model name searches.
+          required: false
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /values/value:
+    get:
+      tags:
+        - Values
+      summary: Value
+      description: Value
+      parameters:
+        - $ref: "#/components/parameters/modelIdRequiredParam"
+        - $ref: "#/components/parameters/yearParam"
+        - schema:
+            type: string
+          in: query
+          name: usage
+          description: Asset usage in hours/miles/kilometers.
+          required: false
+        - $ref: "#/components/parameters/valueConditionParam"
+        - schema:
+            type: string
+          in: query
+          name: country
+          description: Country code.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: region
+          description: U.S. state or Canada postal abbreviation.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: olvFactor
+          description: OLV estimation factor
+          required: false
+        - $ref: "#/components/parameters/valuesOlvBasisParam"
+        - schema:
+            type: string
+          in: query
+          name: revisionDate
+          description: Data collection date in YYYY-MM-DD format.
+          required: false
+      responses:
+        "200":
+          description: "OK"
+
+  /values/trending:
+    get:
+      tags:
+        - Values
+      summary: Value Trends
+      description: Value Trends
+      parameters:
+        - $ref: "#/components/parameters/modelIdRequiredParam"
+        - $ref: "#/components/parameters/yearParam"
+        - schema:
+            type: string
+          in: query
+          name: usage
+          description: Asset usage in hours/miles/kilometers.
+          required: false
+        - $ref: "#/components/parameters/valueConditionParam"
+        - schema:
+            type: string
+          in: query
+          name: country
+          description: Country code.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: region
+          description: U.S. state or Canada postal abbreviation.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: olvFactor
+          description: OLV estimation factor
+          required: false
+        - $ref: "#/components/parameters/valuesOlvBasisParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /values/options:
+    get:
+      tags:
+        - Values
+      summary: Options
+      description: Options
+      parameters:
+        - $ref: "#/components/parameters/sizeClassIdRequiredParam"
+        - $ref: "#/components/parameters/yearRequiredParam"
+        - schema:
+            type: string
+          in: query
+          name: optionFamily
+          description: Option Family name.
+          required: false
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /values/options/families:
+    get:
+      tags:
+        - Values
+      summary: Option Families
+      description: Option Families
+      parameters:
+        - $ref: "#/components/parameters/sizeClassIdRequiredParam"
+        - $ref: "#/components/parameters/yearParam"
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /values/condition:
+    get:
+      tags:
+        - Values
+      summary: Condition Adjustments
+      description: Condition Adjustments
+      parameters:
+        - $ref: "#/components/parameters/modelIdRequiredParam"
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /values/region:
+    get:
+      tags:
+        - Values
+      summary: Region Adjustments
+      description: Region Adjustments
+      parameters:
+        - $ref: "#/components/parameters/modelIdRequiredParam"
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /specs/basic:
+    get:
+      tags:
+        - Specifications
+      summary: Basic Specs
+      description: Basic Specifications
+      parameters:
+        - $ref: "#/components/parameters/modelIdRequiredParam"
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /specs/dimensions:
+    get:
+      x-internal: true
+      tags:
+        - Specifications
+      summary: Dimension Specs
+      parameters:
+        - $ref: "#/components/parameters/sizeClassIdRequiredParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /rental/rentalhouserates:
+    get:
+      tags:
+        - Rental
+      summary: Rental House Rates
+      description: Rental House Rates
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: sizeClassId
+          description: Size ID. Required if modelId not specified.
+          required: false
+        - schema:
+            type: integer
+          in: query
+          name: modelId
+          description: Model ID. Required if sizeClassId not specified.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: participantCode
+          description: Participant Code.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: zipCode
+          description: Zip Code.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: distance
+          description: Search Radius (mi).
+          required: false
+      responses:
+        "200":
+          description: "OK"
+
+  /rental/rentalhousetaxonomy:
+    get:
+      tags:
+        - Rental
+      summary: Rental House Taxonomy
+      description: Rental House Taxonomy
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: sizeClassId
+          description: Size Class ID.
+          required: true
+        - schema:
+            type: integer
+          in: query
+          name: modelId
+          description: Model ID.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: participantCode
+          description: Participant Code.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: participantName
+          description: Participant Name.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: city
+          description: City.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: state
+          description: State.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: zipCode
+          description: Zip Code.
+          required: false
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /rental/rentalhouses:
+    get:
+      tags:
+        - Rental
+      summary: Rental Houses
+      description: Rental Houses
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: participantCode
+          description: Participant Code.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: participantName
+          description: Participant Name.
+          required: false
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/offsetParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /rental/rentalrates:
+    get:
+      tags:
+        - Rental
+      summary: Rental Rates
+      description: Rental Rates
+      parameters:
+        - $ref: "#/components/parameters/sizeClassIdRequiredParam"
+        - schema:
+            type: string
+          in: query
+          name: region
+          description: Region.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: state
+          description: State.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: country
+          description: country.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: revisionDate
+          description: Data collection date in YYYY-MM-DD format.
+          required: false
+      responses:
+        "200":
+          description: "OK"
+
+  /verification/serialnumberverification:
+    get:
+      tags:
+        - Verification
+      summary: Serial Number
+      description: Serial Number Verification
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: serialNumber
+          description: Serial Number.
+          required: true
+        - $ref: "#/components/parameters/manufacturerParam"
+        - $ref: "#/components/parameters/modelParam"
+        - schema:
+            type: boolean
+          in: query
+          name: survey
+          description: Include survey derrived results.
+          required: false
+      responses:
+        "200":
+          description: "OK"
+
+  /cost/configurations:
+    get:
+      tags:
+        - Cost
+      summary: Configurations
+      description: Configurations
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: modelId
+          description: Model ID. Required if manufacturerId and subtypeId are not specified.
+          required: false
+        - $ref: "#/components/parameters/yearParam"
+        - schema:
+            type: integer
+          in: query
+          name: manufacturerId
+          description: Manufacturer ID. Required if modelId is not specified.
+          required: false
+        - schema:
+            type: integer
+          in: query
+          name: subtypeId
+          description: Subtype ID. Required if modelId is not specified.
+          required: false
+        - $ref: "#/components/parameters/configurationSequenceParam"
+        - $ref: "#/components/parameters/costRevisionDateParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /cost/cost-recovery:
+    get:
+      tags:
+        - Cost
+      summary: Cost Recovery
+      description: Cost Recovery
+      parameters:
+        - $ref: "#/components/parameters/modelIdRequiredParam"
+        - $ref: "#/components/parameters/configurationSequenceRequiredParam"
+        - $ref: "#/components/parameters/yearParam"
+        - $ref: "#/components/parameters/costRevisionDateParam"
+        - schema:
+            type: string
+          in: query
+          name: operatingAdjustment
+          description: Operating adjustment multiplier. For example, to increase by 5% use 1.05 as the value.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: ownershipAdjustment
+          description: Ownership adjustment multiplier. For example, to increase by 5% use 1.05 as the value.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: region
+          description: Region.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: regionId
+          description: Region Id.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: city
+          description: City.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: cityId
+          description: City Id.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: organizationId
+          description: Organization Id.
+          required: false
+      responses:
+        "200":
+          description: "OK"
+
+  /cost/icr:
+    get:
+      tags:
+        - Cost
+      summary: ICR
+      description: Internal Charge Rate
+      parameters:
+        - $ref: "#/components/parameters/modelIdRequiredParam"
+        - $ref: "#/components/parameters/configurationSequenceRequiredParam"
+        - $ref: "#/components/parameters/costRevisionDateParam"
+        - schema:
+            type: string
+          in: query
+          name: originalPrice
+          description: Price for the equipment at the time of purchase (excluding discount, freight, and sales tax).
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: fuel
+          description: Price per gallon of fuel.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: annualUseHours
+          description: Average hours used per year.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: economicLifeHours
+          description: Hours of expected use before needing replacement or overhaul.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: salesTax
+          description: Sales tax percent paid at the time of purchase. For example, use 0.05 to represent 5%.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: freightCosts
+          description: Amount paid to ship the equipment after purchase.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: discount
+          description: Percent discounted from the price of the machine. For example, use 0.05 to represent 5%.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: salvage
+          description: Value at the end of equipment's economic life.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: resaleValue
+          description: Current market value of the equipment.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: annualOverhead
+          description: Amount of overhead costs, on average, for the equipment in a given year.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: annualOverhaulLaborHours
+          description: Number of labor hours, on average, required to overhaul the equipment in a given year.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: annualOverhaulPartsCost
+          description: Cost of parts, on average, to overhaul the equipment each year.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: annualFieldLaborHours
+          description: Number of labor hours required, on average, to make regular operating repairs on the equipment each year.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: annualFieldRepairPartsCost
+          description: Cost of parts, on average, to make regular operating repairs on the equipment each year.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: annualSupplyParts
+          description: Cost of supply parts, on average, for the equipment each year.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: newTireCost
+          description: Cost of a new set of tires for the equipment.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: tireLifeHours
+          description: Number of hours new tires are expected to last before needing replacement.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: annualGEC
+          description: Average cost for any ground engaging components, repair and/or replacement costs each year.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: primaryFuelConsumption
+          description: Fuel/Electrical (gph/KWh) consumption of the primary engine of the equipment.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: hourlyLubeCost
+          description: Cost of lube for the equipment per hour of use.
+          required: false
+        - schema:
+            type: string
+          in: query
+          name: mechanicWages
+          description: Average cost per hour paid to the mechanic.
+          required: false
+      responses:
+        "200":
+          description: "OK"
+
+  /bulk/manufacturers:
+    get:
+      tags:
+        - Bulk
+      summary: Bulk Manufacturers
+      description: Bulk Manufacturers
+      parameters:
+        - $ref: "#/components/parameters/classificationIdParam"
+      responses:
+        "200":
+          description: "OK"
+
+  /bulk/models:
+    get:
+      tags:
+        - Bulk
+      summary: Bulk Models
+      description: Bulk Models
+      parameters:
+        - $ref: "#/components/parameters/classificationIdParam"
+      responses:
+        "200":
+          description: "OK"
+
+externalDocs:
+  url: "https://docs.equipmentwatchapi.com/"
+servers:
+  - url: "https://equipmentwatchapi.com/v1"
+    description: "Primary"
+  - url: "https://sandbox.equipmentwatchapi.com/v1"
+    description: "Sandbox"
+components:
+  links: {}
+  callbacks: {}
+  parameters:
+    offsetParam:
+      schema:
+        type: integer
+        minimum: 0
+      in: query
+      name: offset
+      description: >-
+        Offset is used to skip some number of items before beginning to
+        return results. If offset is not specified, 0 items will be skipped
+        in the result by default.
+      required: false
+    limitParam:
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+      in: query
+      name: limit
+      description: >-
+        Parameter is used to limit the number of results returned in the
+        response (max 50). If limit is not specified, 50 items will be
+        returned in the result by default.
+      required: false
+    classificationIdParam:
+      schema:
+        type: integer
+      in: query
+      name: classificationId
+      description: Classification ID.
+      required: false
+    classificationParam:
+      schema:
+        type: string
+      in: query
+      name: classification
+      description: Classification name.
+      required: false
+    categoryIdParam:
+      schema:
+        type: integer
+      in: query
+      name: categoryId
+      description: Category ID.
+      required: false
+    categoryParam:
+      schema:
+        type: string
+      in: query
+      name: category
+      description: Category name.
+      required: false
+    subtypeIdParam:
+      schema:
+        type: integer
+      in: query
+      name: subtypeId
+      description: Subtype ID.
+      required: false
+    subtypeParam:
+      schema:
+        type: string
+      in: query
+      name: subtype
+      description: Subtype name.
+      required: false
+    sizeClassIdParam:
+      schema:
+        type: integer
+      in: query
+      name: sizeClassId
+      description: Size ID.
+      required: false
+    sizeClassIdRequiredParam:
+      schema:
+        type: integer
+      in: query
+      name: sizeClassId
+      description: Size ID.
+      required: true
+    sizeParam:
+      schema:
+        type: string
+      in: query
+      name: size
+      description: Size name.
+      required: false
+    manufacturerIdParam:
+      schema:
+        type: integer
+      in: query
+      name: manufacturerId
+      description: Manufacturer ID.
+      required: false
+    manufacturerParam:
+      schema:
+        type: string
+      in: query
+      name: manufacturer
+      description: Manufacturer name.
+      required: false
+    modelIdParam:
+      schema:
+        type: integer
+      in: query
+      name: modelId
+      description: Model ID.
+      required: false
+    modelIdRequiredParam:
+      schema:
+        type: integer
+      in: query
+      name: modelId
+      description: Model ID.
+      required: true
+    modelParam:
+      schema:
+        type: string
+      in: query
+      name: model
+      description: Model name.
+      required: false
+    yearParam:
+      schema:
+        type: string
+      in: query
+      name: year
+      description: Model year.
+      required: false
+    yearRequiredParam:
+      schema:
+        type: string
+      in: query
+      name: year
+      description: Model year.
+      required: true
+    valueConditionParam:
+      schema:
+        type: string
+        enum: [Excellent, Very Good, Good, Fair, Poor]
+      in: query
+      name: condition
+      description: Asset Condition.
+      required: false
+    costRevisionDateParam:
+      schema:
+        type: string
+      in: query
+      name: date
+      description: Cost revision date in YYYY-MM-DD format. If not specified, most recent date will be returned.
+      required: false
+    configurationSequenceParam:
+      schema:
+        type: string
+      in: query
+      name: configurationSequence
+      description: Configuration Sequence.
+      required: false
+    configurationSequenceRequiredParam:
+      schema:
+        type: string
+      in: query
+      name: configurationSequence
+      description: Configuration Sequence.
+      required: true
+    valuesOlvBasisParam:
+      schema:
+        type: string
+        enum: [FMV, FLV]
+      in: query
+      name: olvBasis
+      description: Basis of OLV estimate. "FMV" or "FLV".
+      required: false
+  schemas:
+    ok:
+      type: object
+  securitySchemes:
+    API Key:
+      type: apiKey
+      name: x-api-key
+      in: header
+security:
+  - API Key: []

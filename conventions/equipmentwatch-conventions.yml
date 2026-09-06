@@ -1,0 +1,173 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  https://docs.equipmentwatchapi.com/openapi.yaml (the published OpenAPI 3.0.3 contract),
+  https://equipmentwatch.com/api/ and its seven per-API pages, plus live unauthenticated
+  probes of https://equipmentwatchapi.com/v1/ on 2026-09-06.
+summary: >-
+  Cross-cutting request/response semantics for the EquipmentWatch REST API. The published
+  contract is a read-only, query-parameter-driven GET surface with header API-key auth,
+  offset/limit pagination and a vendor JSON error envelope. Idempotency, reversibility and
+  dry-run are `na` on the published contract because it has no write operations at all.
+
+base_urls:
+  primary: https://equipmentwatchapi.com/v1
+  sandbox: https://sandbox.equipmentwatchapi.com/v1
+  source: servers[] in the published OpenAPI
+
+api_style: >-
+  REST over HTTPS. All 24 published operations are GET. Every input is a query parameter;
+  no operation declares a requestBody. Responses are JSON.
+
+authentication:
+  scheme: API key in a request header
+  header: x-api-key
+  issuance: >-
+    No self-service signup. Keys are requested through a HubSpot form linked as
+    "Request an API key" from every API page.
+  detail: authentication/equipmentwatch-authentication.yml
+
+pagination:
+  style: offset-limit
+  request_params:
+    offset:
+      type: integer
+      minimum: 0
+      default: 0
+      description: Number of items to skip before returning results.
+    limit:
+      type: integer
+      minimum: 1
+      maximum: 50
+      default: 50
+      description: Maximum items returned. Hard ceiling of 50.
+  response_fields:
+    documented: false
+    note: >-
+      The spec declares no response schema (components/schemas contains only a stub `ok`),
+      so there is no documented total count, has_more flag or next-page cursor. A client
+      must page blind — increment offset until a short page comes back. This is the single
+      largest gap in the contract for an automated consumer.
+  applies_to: all Taxonomy operations and the Bulk operations
+  hard_ceiling: 50
+
+field_selection:
+  supported: false
+  note: No expand[], fields[] or sparse-fieldset mechanism is documented.
+
+filtering:
+  style: query parameters, AND-combined
+  shared_filters:
+    - classificationId / classification
+    - categoryId / category
+    - subtypeId / subtype
+    - sizeClassId / size
+    - manufacturerId / manufacturer
+    - modelId / model
+  note: >-
+    Every filter is offered in both an id form (integer) and a name form (string). The
+    id form is the stable one; the name form is a convenience over EquipmentWatch's
+    aliasing layer. Prefer ids in machine-to-machine use.
+  enumerated_values:
+    condition: [Excellent, Very Good, Good, Fair, Poor]
+
+request_tracing:
+  supported: false
+  observed_headers: []
+  note: >-
+    No request-id, trace-id or correlation header is returned on live responses (checked
+    on 401 responses from equipmentwatchapi.com, 2026-09-06). There is no identifier to
+    quote to support when a call misbehaves.
+
+versioning:
+  style: path prefix
+  current: v1
+  evidence: servers[] carry /v1; info.version is 1.0.0
+  media_type_versioning: false
+  date_versioning: false
+  note: >-
+    Only one version has ever been published. There is no documented policy for how a v2
+    would be introduced or how long v1 would be supported. See lifecycle/.
+
+error_envelope:
+  format: vendor JSON — {errorCode, errorMessage, errorDescription}
+  rfc9457: false
+  detail: errors/equipmentwatch-problem-types.yml
+
+rate_limit_signaling:
+  headers: []
+  status_on_exhaustion: undocumented
+  observed: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header appeared on any live response
+    (probed 2026-09-06, unauthenticated 401s). Whether limits exist behind a valid key
+    is undocumented.
+  detail: rate-limits/equipmentwatch-rate-limits.yml
+
+security_headers:
+  observed_on_api_host:
+    - strict-transport-security: max-age=15552000; includeSubDomains
+    - content-security-policy (default-src 'self' ...)
+    - x-content-type-options: nosniff
+    - x-frame-options: SAMEORIGIN
+    - referrer-policy: no-referrer
+    - x-permitted-cross-domain-policies: none
+  cors:
+    access-control-allow-origin: '*'
+  note: >-
+    Helmet-style defaults are applied on equipmentwatchapi.com. CORS is fully open, so
+    the API is callable from a browser — but since the only credential is a header API
+    key, browser-side use would expose the key.
+
+idempotency:
+  coverage: na
+  supported: na
+  mechanism: null
+  scope: []
+  note: >-
+    `na`, not `none`. The published contract has zero mutating operations — all 24
+    published operations are GET, which are inherently idempotent. There is nothing for
+    an Idempotency-Key header to protect. No `Idempotency` pointer is emitted.
+  caveat: >-
+    The Integration API documented at https://equipmentwatch.com/api/integration/ DOES
+    advertise write operations (POST All Saved Models, POST Groups). Those operations are
+    absent from the published OpenAPI, so no idempotency semantics can be assessed for
+    them. If EquipmentWatch publishes the Integration API contract, this block must be
+    re-evaluated as `none` or `partial` rather than `na`.
+
+reversibility:
+  coverage: na
+  grade: na
+  write_surfaces: []
+  note: >-
+    `na`, not `none`. The published API is read-only: it returns equipment taxonomy,
+    specifications, values, rates, costs and serial-number verification. No operation
+    creates, modifies or deletes provider-side state, so there is nothing to reverse and
+    no reversal window to state. An honest `na` here leaves the denominator rather than
+    scoring a zero the provider does not deserve.
+  caveat: >-
+    Same caveat as idempotency: the undocumented Integration API writes user-saved models
+    and groups into the EquipmentWatch application. No delete/undo operation is named on
+    that page and no contract is published, so reversibility for that surface is
+    genuinely unknown — it is NOT asserted here.
+
+dry_run_mode:
+  supported: na
+  note: No write surface in the published contract, so a dry-run mode has nothing to rehearse.
+
+bulk:
+  supported: true
+  operations:
+    - GET /bulk/manufacturers
+    - GET /bulk/models
+  note: >-
+    A dedicated Bulk tag exists for full-corpus taxonomy pulls, separate from the paged
+    /taxonomy/* operations. Use these to seed a local mirror rather than paging
+    /taxonomy/models 50 rows at a time.
+
+cross_links:
+  authentication: authentication/equipmentwatch-authentication.yml
+  errors: errors/equipmentwatch-problem-types.yml
+  lifecycle: lifecycle/equipmentwatch-lifecycle.yml
+  rate_limits: rate-limits/equipmentwatch-rate-limits.yml
+  sandbox: sandbox/equipmentwatch-sandbox.yml
+  data_model: data-model/equipmentwatch-data-model.yml

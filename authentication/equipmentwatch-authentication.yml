@@ -1,0 +1,15 @@
+generated: '2026-09-06'
+method: derived
+source: openapi/equipmentwatch-api-openapi.yaml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: API Key
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  sources:
+  - openapi/equipmentwatch-api-openapi.yaml

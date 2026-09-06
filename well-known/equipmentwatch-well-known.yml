@@ -1,0 +1,191 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  Direct HTTPS probes of every host this record knows — the registrable domain and www,
+  the API base host from the published OpenAPI servers[], the documented sandbox host,
+  the docs/console host, and the application host. Probed 2026-09-06.
+summary:
+  hosts_probed: 6
+  paths_probed_per_host: 7
+  documents_served: 0
+  note: >-
+    EquipmentWatch serves no /.well-known/ documents on any host. Two hosts —
+    docs.equipmentwatchapi.com (a CloudFront/S3 single-page RapiDoc app) and
+    app.equipmentwatch.com (a CloudFront SPA) — answer HTTP 200 with an identical
+    HTML shell for EVERY path under /.well-known/, including paths that plainly do not
+    exist. These are catch-all SPA responses, not documents: the 1317-byte body returned
+    for /.well-known/agent-card.json on docs.equipmentwatchapi.com is byte-identical to
+    the site's index.html. They are recorded as misses. No WellKnown, SecurityTxt or
+    AgentCard pointer is emitted for this provider.
+hosts:
+  - host: equipmentwatch.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: www.equipmentwatch.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: equipmentwatchapi.com
+    note: API base host declared in the published OpenAPI servers[] (https://equipmentwatchapi.com/v1).
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: sandbox.equipmentwatchapi.com
+    note: Sandbox host declared in the published OpenAPI servers[].
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: docs.equipmentwatchapi.com
+    note: >-
+      SPA catch-all. Every path returns HTTP 200 with the same 1317-byte RapiDoc
+      index.html (content-type text/html). Treated as a miss on every path — a 200
+      returning an HTML shell is not a document.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/agent-card.json
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/agent.json
+        status: 200
+        file: null
+        result: spa-shell
+  - host: app.equipmentwatch.com
+    note: >-
+      SPA catch-all. Every path returns HTTP 200 with the same 2038-byte application
+      shell (content-type text/html). Treated as a miss on every path.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/agent-card.json
+        status: 200
+        file: null
+        result: spa-shell
+      - path: /.well-known/agent.json
+        status: 200
+        file: null
+        result: spa-shell

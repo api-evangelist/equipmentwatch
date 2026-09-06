@@ -1,0 +1,152 @@
+generated: '2026-09-06'
+method: derived
+status: candidate
+source: >-
+  DERIVED candidate. EquipmentWatch ships no MCP server. This tool list is computed from the
+  24 operations in the published OpenAPI at https://docs.equipmentwatchapi.com/openapi.yaml.
+  It describes what an MCP server over this API WOULD expose; it is not a server that exists.
+provider: Equipmentwatch
+providerId: equipmentwatch
+description: >-
+  Candidate MCP tool surface derived from the EquipmentWatch OpenAPI. Every tool below binds
+  1:1 to a real published GET operation. No endpoint is asserted, because none exists.
+
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: probed
+  note: >-
+    Probed on 2026-09-06: POST tools/list returned 404 "Cannot POST /mcp" at
+    https://equipmentwatchapi.com/mcp and https://equipmentwatchapi.com/v1/mcp;
+    mcp.equipmentwatch.com does not resolve; https://equipmentwatch.com/mcp is a WordPress
+    404. No npm, PyPI or other registry package exists (see packages/). No MCP server is
+    published in any form — hosted or stdio. `auth: api-key` records what a server would
+    have to carry (the x-api-key header the REST API requires), not an observed challenge.
+
+search_performed:
+  - probe: POST {"jsonrpc":"2.0","id":1,"method":"tools/list"} to https://equipmentwatchapi.com/mcp
+    result: 404
+  - probe: POST {"jsonrpc":"2.0","id":1,"method":"tools/list"} to https://equipmentwatchapi.com/v1/mcp
+    result: 404
+  - probe: https://mcp.equipmentwatch.com/mcp
+    result: DNS NXDOMAIN
+  - probe: POST to https://equipmentwatch.com/mcp
+    result: 404
+  - probe: npm / PyPI registry search for an EquipmentWatch or Fusable MCP package
+    result: 0 results
+
+candidate_tools:
+  - name: list_equipment_classifications
+    rest: GET /taxonomy/classifications
+    category: taxonomy
+    description: List top-level equipment classifications, filterable across the whole taxonomy.
+  - name: list_equipment_categories
+    rest: GET /taxonomy/categories
+    category: taxonomy
+    description: List equipment categories (Excavators, Graders, Compactors, Aerial Lifts).
+  - name: list_equipment_subtypes
+    rest: GET /taxonomy/subtypes
+    category: taxonomy
+    description: List subtypes within a category.
+  - name: list_equipment_sizes
+    rest: GET /taxonomy/sizes
+    category: taxonomy
+    description: List size classes within a subtype.
+  - name: list_manufacturers
+    rest: GET /taxonomy/manufacturers
+    category: taxonomy
+    description: List equipment manufacturers.
+  - name: list_models
+    rest: GET /taxonomy/models
+    category: taxonomy
+    description: List equipment models, with alias normalisation. The primary lookup for resolving a modelRdbId.
+  - name: get_equipment_value
+    rest: GET /values/value
+    category: valuation
+    description: Fair Market, Forced Liquidation and Orderly Liquidation values for a model, year and condition.
+  - name: get_value_trending
+    rest: GET /values/trending
+    category: valuation
+    description: Trended value history for a model.
+  - name: list_value_options
+    rest: GET /values/options
+    category: valuation
+    description: Options and extras that adjust a valuation.
+  - name: list_value_option_families
+    rest: GET /values/options/families
+    category: valuation
+    description: Families that group options and extras.
+  - name: list_value_conditions
+    rest: GET /values/condition
+    category: valuation
+    description: Condition bands used to adjust values (Excellent, Very Good, Good, Fair, Poor).
+  - name: list_value_regions
+    rest: GET /values/region
+    category: valuation
+    description: Regions for which region-adjusted values are published.
+  - name: get_model_specs
+    rest: GET /specs/basic
+    category: specifications
+    description: Machine specifications for a model, grouped by component.
+  - name: get_model_dimensions
+    rest: GET /specs/dimensions
+    category: specifications
+    description: Weights and dimensions for a model — the shipping-estimation surface.
+  - name: get_rental_rates
+    rest: GET /rental/rentalrates
+    category: rental
+    description: National and regional daily, weekly and monthly retail rental rates for a model.
+  - name: get_rental_house_rates
+    rest: GET /rental/rentalhouserates
+    category: rental
+    description: Rental rates specific to a named rental house.
+  - name: list_rental_houses
+    rest: GET /rental/rentalhouses
+    category: rental
+    description: List rental houses whose rates are carried.
+  - name: get_rental_house_taxonomy
+    rest: GET /rental/rentalhousetaxonomy
+    category: rental
+    description: The taxonomy a given rental house uses, for mapping to EquipmentWatch ids.
+  - name: verify_serial_number
+    rest: GET /verification/serialnumberverification
+    category: verification
+    description: Resolve a serial number to a year of manufacture and candidate models.
+  - name: list_cost_configurations
+    rest: GET /cost/configurations
+    category: costs
+    description: Build configurations available for a model, required to price cost recovery.
+  - name: get_cost_recovery_rate
+    rest: GET /cost/cost-recovery
+    category: costs
+    description: Rental Rate Blue Book ownership and operating cost recovery rates, plus the FHWA rate.
+  - name: get_internal_charge_rate
+    rest: GET /cost/icr
+    category: costs
+    description: Internal charge rates customised with user-supplied cost factors.
+  - name: bulk_list_manufacturers
+    rest: GET /bulk/manufacturers
+    category: bulk
+    description: Full manufacturer corpus for seeding a local mirror.
+  - name: bulk_list_models
+    rest: GET /bulk/models
+    category: bulk
+    description: Full model corpus for seeding a local mirror.
+
+coverage:
+  openapi_operations: 24
+  candidate_tools: 24
+  unmapped_operations: 0
+  read_only: true
+
+caveats:
+  - >-
+    Input schemas would inherit the OpenAPI query parameters, which ARE fully specified
+    (23 reusable components with types, minimums, maximums and enums). Output schemas
+    could NOT be derived: the spec declares no response schemas.
+  - >-
+    The Market Data and Integration APIs documented on equipmentwatch.com are absent from
+    the contract, so no candidate tools are proposed for them.

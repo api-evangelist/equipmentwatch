@@ -1,0 +1,89 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  Direct registry searches on 2026-09-06 plus a search of the EquipmentWatch and Fusable
+  developer surfaces and of GitHub for a first-party organization.
+provider: Equipmentwatch
+providerId: equipmentwatch
+description: >-
+  EquipmentWatch publishes no client libraries in any package registry, and operates no
+  GitHub organization. Integration is raw HTTPS against https://equipmentwatchapi.com/v1
+  with an x-api-key header. This file records the search, not an omission.
+
+package_count: 0
+official_package_count: 0
+packages: []
+
+registries_searched:
+  - registry: npm
+    query: equipmentwatch
+    endpoint: https://registry.npmjs.org/-/v1/search?text=equipmentwatch
+    results: 0
+  - registry: npm
+    query: fusable
+    endpoint: https://registry.npmjs.org/-/v1/search?text=fusable
+    results: 0
+  - registry: pypi
+    query: equipmentwatch
+    endpoint: https://pypi.org/pypi/equipmentwatch/json
+    status: 404
+    results: 0
+  - registry: rubygems
+    query: equipmentwatch
+    endpoint: https://rubygems.org/api/v1/search.json?query=equipmentwatch
+    results: 0
+  - registry: crates.io
+    query: equipmentwatch
+    endpoint: https://crates.io/api/v1/crates?q=equipmentwatch
+    results: 0
+  - registry: packagist
+    query: equipmentwatch
+    endpoint: https://packagist.org/search.json?q=equipmentwatch
+    results: 0
+  - registry: nuget
+    query: equipmentwatch
+    endpoint: https://azuresearch-usnc.nuget.org/query?q=equipmentwatch
+    results: 0
+  - registry: maven-central
+    query: equipmentwatch
+    results: 0
+  - registry: pkg.go.dev
+    query: equipmentwatch
+    results: 0
+
+source_control:
+  github_orgs_checked:
+    - org: equipmentwatch
+      status: 404
+    - org: fusable
+      status: 404
+    - org: randall-reilly
+      status: 404
+  github_repo_search:
+    query: equipmentwatch
+    total: 2
+    first_party_matches: 0
+    note: >-
+      The only two repositories are a third-party Apify scraper actor
+      (VastHornet/equipmentwatch-scraper) and API Evangelist's own profile repo. Neither is
+      first-party. No EquipmentWatch or Fusable source is published anywhere.
+
+third_party_collections:
+  - name: Postman public workspace "Equipmentwatch"
+    url: https://www.postman.com/postman-atlas/equipmentwatch
+    publisher: Postman Atlas
+    first_party: false
+    collection_count: 8
+    note: >-
+      Published by Postman's own "Postman Atlas" indexing team, not by EquipmentWatch. It
+      is a machine-generated mirror of the public OpenAPI, not a provider-maintained
+      collection, so no `Postman` pointer is emitted on the provider's behalf. Recorded
+      here so a future pass does not mistake it for first-party work.
+
+note: >-
+  No `SDKs` and no `Packages` pointer is emitted in apis.yml. Both would assert the provider
+  ships client libraries; they do not. The absence is the finding: a data API whose typical
+  buyer integrates into JD Edwards, SAP, HCSS, Sage/Timberline, LeaseWave, Insurity or
+  Guidewire ships no helper library in any language, and the abandonment signal this
+  pipeline normally reads from a stale SDK release date is simply unavailable here because
+  no SDK was ever published.

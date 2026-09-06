@@ -1,0 +1,143 @@
+# generated: '2026-09-06'
+# method: generated
+# source: >-
+#   OpenAPI Overlay 1.0.0 capturing API Evangelist's enhancements to the EquipmentWatch
+#   OpenAPI harvested verbatim from https://docs.equipmentwatchapi.com/openapi.yaml on
+#   2026-09-06. The original spec is never mutated; this overlay is applied on top of
+#   openapi/equipmentwatch-api-openapi.yaml.
+#
+#   Every action below adds metadata that is DERIVED or OBSERVED, never invented:
+#   operationIds are computed from method + path (the source spec declares none), tags are
+#   promoted from the per-operation tag values already present, and the 401 response is the
+#   live response observed from https://equipmentwatchapi.com/v1/ on 2026-09-06.
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — EquipmentWatch API
+  version: 1.0.0
+extends: ../openapi/equipmentwatch-api-openapi.yaml
+actions:
+  - target: $.info
+    description: Record the licence-free profiling provenance and the docs home.
+    update:
+      x-apievangelist-profile: https://apis.io/providers/equipmentwatch/
+      x-apievangelist-harvested: '2026-09-06'
+      x-source-url: https://docs.equipmentwatchapi.com/openapi.yaml
+
+  - target: $
+    description: >-
+      Declare the tag set. The source spec tags every operation but never declares a
+      root-level tags[] block, so a renderer has no descriptions to show.
+    update:
+      tags:
+        - name: Taxonomy
+          description: >-
+            Manufacturer, model, category, subtype and size-class reference data. The
+            foundation every other surface joins against via RDB identifiers.
+        - name: Values
+          description: >-
+            Fair Market, Forced Liquidation and Orderly Liquidation values, current and
+            trended, adjustable by condition, options and region.
+        - name: Specifications
+          description: Machine specifications and dimensions, grouped by component.
+        - name: Rental
+          description: National, regional and rental-house-specific retail rental rates.
+        - name: Verification
+          description: Serial-number to year-of-manufacture verification.
+        - name: Cost
+          description: >-
+            Rental Rate Blue Book ownership and operating cost recovery rates, FHWA rates
+            and customisable internal charge rates.
+        - name: Bulk
+          description: >-
+            Full-corpus manufacturer and model pulls, intended for seeding a local mirror
+            rather than paging the taxonomy endpoints 50 rows at a time.
+
+  - target: $
+    description: >-
+      Add the observed unauthenticated error response as a reusable component. The source
+      spec declares NO error responses on any operation; this envelope was observed live on
+      2026-09-06 and is documented in errors/equipmentwatch-problem-types.yml.
+    update:
+      components:
+        schemas:
+          Error:
+            type: object
+            description: >-
+              EquipmentWatch's vendor error envelope. Not RFC 9457 — served as
+              application/json with no type/title/status/detail members.
+            properties:
+              errorCode:
+                type: integer
+                description: Vendor-specific numeric error code.
+                example: 10
+              errorMessage:
+                type: string
+                example: Invalid API Key
+              errorDescription:
+                type: string
+                example: API Key Provided is invalid
+        responses:
+          Unauthorized:
+            description: >-
+              Missing or invalid x-api-key. EquipmentWatch does not distinguish a missing
+              credential from an invalid one — both return errorCode 10.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+
+  - target: $.paths['/taxonomy/classifications'].get
+    update: {operationId: listTaxonomyClassifications}
+  - target: $.paths['/taxonomy/categories'].get
+    update: {operationId: listTaxonomyCategories}
+  - target: $.paths['/taxonomy/subtypes'].get
+    update: {operationId: listTaxonomySubtypes}
+  - target: $.paths['/taxonomy/sizes'].get
+    update: {operationId: listTaxonomySizes}
+  - target: $.paths['/taxonomy/manufacturers'].get
+    update: {operationId: listTaxonomyManufacturers}
+  - target: $.paths['/taxonomy/models'].get
+    update: {operationId: listTaxonomyModels}
+  - target: $.paths['/values/value'].get
+    update: {operationId: getValue}
+  - target: $.paths['/values/trending'].get
+    update: {operationId: getValueTrending}
+  - target: $.paths['/values/options'].get
+    update: {operationId: listValueOptions}
+  - target: $.paths['/values/options/families'].get
+    update: {operationId: listValueOptionFamilies}
+  - target: $.paths['/values/condition'].get
+    update: {operationId: listValueConditions}
+  - target: $.paths['/values/region'].get
+    update: {operationId: listValueRegions}
+  - target: $.paths['/specs/basic'].get
+    update: {operationId: getSpecsBasic}
+  - target: $.paths['/specs/dimensions'].get
+    update: {operationId: getSpecsDimensions}
+  - target: $.paths['/rental/rentalhouserates'].get
+    update: {operationId: getRentalHouseRates}
+  - target: $.paths['/rental/rentalhousetaxonomy'].get
+    update: {operationId: getRentalHouseTaxonomy}
+  - target: $.paths['/rental/rentalhouses'].get
+    update: {operationId: listRentalHouses}
+  - target: $.paths['/rental/rentalrates'].get
+    update: {operationId: getRentalRates}
+  - target: $.paths['/verification/serialnumberverification'].get
+    update: {operationId: verifySerialNumber}
+  - target: $.paths['/cost/configurations'].get
+    update: {operationId: listCostConfigurations}
+  - target: $.paths['/cost/cost-recovery'].get
+    update: {operationId: getCostRecoveryRate}
+  - target: $.paths['/cost/icr'].get
+    update: {operationId: getInternalChargeRate}
+  - target: $.paths['/bulk/manufacturers'].get
+    update: {operationId: bulkListManufacturers}
+  - target: $.paths['/bulk/models'].get
+    update: {operationId: bulkListModels}
+
+  - target: $.paths.*.get
+    description: Attach the observed 401 to every operation. All 24 operations are GET and all require the key.
+    update:
+      responses:
+        '401':
+          $ref: '#/components/responses/Unauthorized'

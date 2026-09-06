@@ -1,12 +1,22 @@
-generated: '2026-07-11'
+generated: '2026-09-06'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: www.equipmentwatch.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep 14 13:29:40 2026 GMT
+  cert_expires: Nov 12 14:27:14 2026 GMT
   hsts: false
+- host: equipmentwatch.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 11 22:28:54 2026 GMT
+  hsts: false
+- host: equipmentwatchapi.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Feb 10 23:59:59 2027 GMT
+  hsts: null
 domains:
 - domain: equipmentwatch.com
   dnssec: false
@@ -14,3 +24,8 @@ domains:
   spf: true
   dmarc: true
   dmarc_policy: reject
+- domain: equipmentwatchapi.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false

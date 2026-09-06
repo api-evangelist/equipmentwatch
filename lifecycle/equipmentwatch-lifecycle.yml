@@ -1,0 +1,104 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  https://docs.equipmentwatchapi.com/ and its openapi.yaml, https://equipmentwatch.com/api/,
+  https://equipmentwatch.com/legal/terms-of-service/, plus live probes for a status page and
+  changelog on 2026-09-06.
+provider: Equipmentwatch
+providerId: equipmentwatch
+description: >-
+  Versioning, deprecation, availability and change-communication posture for the
+  EquipmentWatch API. Almost every field here is a documented absence — that is the finding.
+
+versioning:
+  scheme: path-prefix
+  current_version: v1
+  info_version: 1.0.0
+  evidence: >-
+    servers[] are https://equipmentwatchapi.com/v1 and https://sandbox.equipmentwatchapi.com/v1;
+    info.version is 1.0.0 in the published OpenAPI.
+  policy_published: false
+  policy_url: null
+  note: >-
+    A version is present in the path, but no policy states how breaking changes are
+    introduced, whether a v2 would run alongside v1, or how long v1 is supported.
+
+deprecation:
+  policy_published: false
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  evidence: >-
+    Zero operations in the published spec carry `deprecated: true`. No Sunset or Deprecation
+    response header was observed on live responses from https://equipmentwatchapi.com/v1/
+    (probed 2026-09-06). No deprecation or retirement policy page exists on either
+    equipmentwatch.com or docs.equipmentwatchapi.com.
+  note: >-
+    No `Deprecation` pointer is emitted — there is no policy to point at.
+
+status_page:
+  exists: false
+  url: null
+  evidence:
+    - url: https://status.equipmentwatchapi.com/
+      result: DNS NXDOMAIN
+    - url: https://status.fusable.com/
+      result: DNS NXDOMAIN
+    - url: https://equipmentwatch.statuspage.io/
+      status: 200
+      result: >-
+        Redirects to the Atlassian Statuspage marketing site — no EquipmentWatch page is
+        provisioned on that subdomain. A soft hit, recorded as a miss.
+  note: >-
+    No `StatusPage` pointer is emitted. There is no published uptime, incident history or
+    maintenance calendar for a data API that finance and insurance systems call
+    synchronously during underwriting.
+
+sla:
+  published: false
+  url: null
+  note: >-
+    The public Terms of Service at https://equipmentwatch.com/legal/terms-of-service/ is a
+    subscription agreement, not an API service-level agreement. No uptime target, latency
+    target, support-response target or credit regime is published for the API.
+
+changelog:
+  exists: false
+  url: null
+  evidence: >-
+    docs.equipmentwatchapi.com is a single-page RapiDoc app served from S3/CloudFront with
+    an SPA catch-all — every path including /changelog.html returns the same 1317-byte
+    index shell, so there is no separate changelog page. No release-notes section exists
+    under equipmentwatch.com/api/. No `ChangeLog` pointer is emitted.
+
+freshness_signal:
+  docs_index_last_modified: '2023-10-17T17:13:24Z'
+  evidence: >-
+    last-modified header on https://docs.equipmentwatchapi.com/ (observed 2026-09-06). This
+    dates the RapiDoc HTML wrapper, not necessarily openapi.yaml, but it is the only
+    published date signal on the API surface and it is nearly three years old.
+  note: >-
+    Treat with care: a static index.html that never changes is expected to carry an old
+    last-modified. It is recorded because it is the ONLY dated artifact the API surface
+    publishes — there is no changelog, no version history and no release feed to
+    corroborate or contradict it.
+
+support:
+  channels:
+    - type: email
+      value: customerservice@equipmentwatch.com
+      source: info.contact.email in the published OpenAPI
+    - type: web
+      value: https://equipmentwatch.com/contact-us/
+    - type: phone
+      value: '+1 888-307-1713'
+      source: site header on https://equipmentwatch.com/api/
+  developer_specific_support: false
+  note: Support is the general customer-service channel; there is no developer support desk.
+
+recommendations:
+  - Publish a deprecation policy and emit RFC 8594 Sunset/Deprecation headers.
+  - Stand up a status page — synchronous valuation calls in underwriting workflows need one.
+  - Publish a dated changelog for the OpenAPI so integrators can detect contract drift.

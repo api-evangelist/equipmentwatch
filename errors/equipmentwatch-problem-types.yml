@@ -1,0 +1,78 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  Live unauthenticated responses from https://equipmentwatchapi.com/v1/ (probed 2026-09-06),
+  cross-checked against the published OpenAPI at https://docs.equipmentwatchapi.com/openapi.yaml.
+  The spec itself declares ONLY a 200 response on all 24 operations and documents no error
+  responses at all, so every entry below is derived from an observed live response, not from
+  the contract.
+provider: Equipmentwatch
+providerId: equipmentwatch
+format: vendor-json
+rfc9457: false
+content_type: application/json; charset=utf-8
+description: >-
+  EquipmentWatch returns a flat, vendor-specific JSON error envelope. It is NOT RFC 9457
+  (application/problem+json): there is no `type`, `title`, `status`, `detail` or `instance`
+  member, and the media type is plain application/json. The envelope carries a numeric
+  vendor `errorCode` alongside a short message and a longer description. Unmatched routes
+  fall through to the framework's default HTML error page rather than the JSON envelope,
+  so a client must not assume every non-2xx body parses as JSON.
+envelope:
+  shape: object
+  fields:
+    - name: errorCode
+      type: integer
+      description: Vendor-specific numeric error code. Stable identifier to branch on.
+    - name: errorMessage
+      type: string
+      description: Short human-readable summary.
+    - name: errorDescription
+      type: string
+      description: Longer human-readable explanation.
+  example: |
+    {"errorCode":10,"errorMessage":"Invalid API Key","errorDescription":"API Key Provided is invalid"}
+problem_types:
+  - code: 10
+    status: 401
+    title: Invalid API Key
+    detail: API Key Provided is invalid
+    observed: true
+    evidence:
+      url: https://equipmentwatchapi.com/v1/taxonomy/categories
+      note: >-
+        Returned both with no x-api-key header at all and with a syntactically valid but
+        unissued UUID key. EquipmentWatch does not distinguish "missing credential" from
+        "wrong credential" — both are errorCode 10 / HTTP 401. An agent cannot tell from
+        the response whether it forgot the header or holds a revoked key.
+    remediation: >-
+      Send a valid key in the x-api-key request header. Keys are issued through the
+      request-an-API-key form at https://equipmentwatch.com/api/ — there is no
+      self-service key provisioning.
+  - status: 404
+    title: Route not found
+    detail: 'Cannot GET /v1/<path>'
+    format: text/html
+    observed: true
+    evidence:
+      url: https://equipmentwatchapi.com/v1/nope
+      note: >-
+        Unmatched routes return an Express-style HTML error page (content-type
+        text/html; charset=utf-8), NOT the JSON error envelope. Clients that blindly
+        JSON.parse() an error body will throw here.
+    remediation: Check the path against the published OpenAPI paths.
+undocumented:
+  note: >-
+    No 4xx or 5xx response is declared anywhere in the published OpenAPI, and no error
+    reference page exists on equipmentwatch.com or docs.equipmentwatchapi.com. The
+    error surface beyond 401 and 404 — validation failures on required parameters
+    (modelId, year, sizeClassId, configurationSequence), quota or entitlement denials
+    for data domains a key is not licensed for, and 5xx behaviour — is undocumented and
+    could not be observed without an issued key. It is recorded here as a gap, not
+    guessed at.
+  missing_status_codes_in_spec: [400, 401, 403, 404, 429, 500, 503]
+  docs_error_reference: null
+recommendation: >-
+  Declaring the observed 401 envelope (and the required-parameter 400) as components/responses
+  in the OpenAPI would cost a few lines and turn an undocumented runtime surprise into a
+  contract an integrator can code against.

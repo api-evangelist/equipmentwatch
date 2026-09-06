@@ -1,0 +1,225 @@
+generated: '2026-09-06'
+method: derived
+source: >-
+  Derived from the parameter library of the published OpenAPI
+  (https://docs.equipmentwatchapi.com/openapi.yaml) and from the response examples published
+  on https://equipmentwatch.com/api/taxonomy/, /specs/, /values/, /costs/, /rental/,
+  /verification/, /market-data/ and /integration/ (fetched 2026-09-06).
+provider: Equipmentwatch
+providerId: equipmentwatch
+description: >-
+  The EquipmentWatch entity graph. IMPORTANT PROVENANCE NOTE: the published OpenAPI declares
+  NO response schemas — components/schemas contains a single stub named `ok`. This model is
+  therefore derived from two things that do exist: the 23 reusable query parameters (which
+  name every filterable entity and its id field) and the response payload examples published
+  on the provider's own per-API pages. Field lists are what those examples demonstrably
+  contain, not a complete schema. Anything not observed is left out rather than guessed.
+
+identifier_scheme:
+  name: EquipmentWatch / Rental Rate Blue Book RDB identifiers
+  pattern: '<entity>RdbId (integer)'
+  note: >-
+    Every core entity carries an integer RDB id. These ids are the join keys across all
+    seven data surfaces — a modelRdbId returned by Taxonomy is the same modelRdbId accepted
+    by Values, Costs, Rental, Specs and Market Data. There is no UUID or prefixed-string id
+    anywhere in the surface.
+
+entities:
+  - name: Classification
+    id_field: classificationId
+    name_field: classification
+    description: Top level of the equipment taxonomy.
+    surfaced_by: [GET /taxonomy/classifications]
+
+  - name: Category
+    id_field: categoryRdbId
+    query_param: categoryId
+    name_field: categoryName
+    description: Equipment category, e.g. Excavators, Graders, Compactors, Aerial Lifts.
+    surfaced_by: [GET /taxonomy/categories, GET /taxonomy/classifications]
+
+  - name: Subtype
+    id_field: equipmentSubtypeRdbId
+    query_param: subtypeId
+    name_field: equipmentSubtypeName
+    description: Category subdivision, e.g. Articulated Frame Graders, Single Drum Vibratory Compactors.
+    surfaced_by: [GET /taxonomy/subtypes]
+
+  - name: SizeClass
+    id_field: equipmentSubtypeSizeRdbId
+    query_param: sizeClassId
+    name_field: equipmentSubtypeSizeName
+    description: Capacity band within a subtype, e.g. "130 - 144 HP", "3.0 - 4.9 MTons".
+    surfaced_by: [GET /taxonomy/sizes]
+
+  - name: Manufacturer
+    id_field: manufacturerRdbId
+    query_param: manufacturerId
+    name_field: manufacturerName
+    description: Equipment OEM, e.g. Caterpillar, Genie, Dynapac.
+    surfaced_by: [GET /taxonomy/manufacturers, GET /bulk/manufacturers]
+
+  - name: Model
+    id_field: modelRdbId
+    query_param: modelId
+    name_field: modelName
+    observed_fields: [modelRdbId, modelName, modelAliases, modelInstanceName, year]
+    description: >-
+      The central entity of the whole surface. Carries an alias list that normalises OEM
+      naming variants and user input errors.
+    surfaced_by: [GET /taxonomy/models, GET /bulk/models]
+
+  - name: Configuration
+    id_field: configurationSequence
+    description: >-
+      A specific build configuration of a model. Required on cost operations that price a
+      particular configuration.
+    surfaced_by: [GET /cost/configurations]
+
+  - name: Specification
+    observed_fields: [componentName, specificationName, value]
+    description: >-
+      A single machine specification, grouped by component (Engine, Moldboard, Operator
+      Protection, hydraulics, axles and tires, fluid capacities).
+    surfaced_by: [GET /specs/basic, GET /specs/dimensions]
+
+  - name: Value
+    observed_fields:
+      [year, meterreads, condition, country, subdivision, original, adjustedFmv, adjustedFlv,
+       unadjustedFmv, unadjustedFlv, revisionDate]
+    description: >-
+      A valuation of a model at a year, condition and location. FMV / FLV are published in
+      adjusted and unadjusted form; OLV is available via the olvBasis parameter.
+    surfaced_by: [GET /values/value, GET /values/trending, GET /values/condition, GET /values/region]
+
+  - name: OptionOrExtra
+    description: Add-on equipment affecting a valuation; grouped into families.
+    surfaced_by: [GET /values/options, GET /values/options/families]
+
+  - name: Cost
+    observed_fields: [ownershipCost, hourlyOwnershipCost, hourlyOperatingCost, fhwaRate, year]
+    description: >-
+      Ownership and operating cost recovery rates from the Rental Rate Blue Book, plus the
+      FHWA rate. Internal charge rates are the customisable form.
+    surfaced_by: [GET /cost/cost-recovery, GET /cost/icr]
+
+  - name: RentalRate
+    observed_fields: [daily_rate, weekly_rate, monthly_rate, date, subdivision, revisionDate]
+    description: National, regional or rental-house-specific retail rental rates for a model.
+    surfaced_by: [GET /rental/rentalrates, GET /rental/rentalhouserates]
+
+  - name: RentalHouse
+    description: A rental company whose published rates are carried in the corpus.
+    surfaced_by: [GET /rental/rentalhouses, GET /rental/rentalhousetaxonomy]
+
+  - name: SerialNumberVerification
+    observed_fields: [serialNumber, lowSerialNumber, highSerialNumber, year, models]
+    description: >-
+      Maps a supplied serial number to a year of manufacture by locating it inside a
+      manufacturer's serial range for a model.
+    surfaced_by: [GET /verification/serialnumberverification]
+
+  - name: MarketTransaction
+    observed_fields:
+      [saleType, year, condition, date, marketplaceName, marketplaceUrl, participantRdbId,
+       price, country, state, city]
+    description: >-
+      A raw auction or resale observation. NOT in the published OpenAPI — derived solely
+      from the response example on https://equipmentwatch.com/api/market-data/.
+    surfaced_by: [Market Data API — documented on the site, absent from the contract]
+    contract_status: undocumented
+
+  - name: SavedModel
+    observed_fields:
+      [id, userId, uniqueId, condition, modelName, manufacturerName, subtypeName,
+       categoryName, modelYear, modelRdbId, configurationSequence, optionsAndExtras,
+       components, groups, advantageAgreementIds]
+    description: >-
+      A user's saved asset inside the EquipmentWatch application. NOT in the published
+      OpenAPI — derived from the response example on https://equipmentwatch.com/api/integration/.
+      This is the only entity with documented write operations.
+    surfaced_by: [Integration API — documented on the site, absent from the contract]
+    contract_status: undocumented
+
+relationships:
+  - from: Classification
+    to: Category
+    type: has_many
+    via: classificationId
+  - from: Category
+    to: Subtype
+    type: has_many
+    via: categoryRdbId
+  - from: Subtype
+    to: SizeClass
+    type: has_many
+    via: equipmentSubtypeRdbId
+  - from: Manufacturer
+    to: Model
+    type: has_many
+    via: manufacturerRdbId
+  - from: Model
+    to: Subtype
+    type: belongs_to
+    via: equipmentSubtypeRdbId
+  - from: Model
+    to: SizeClass
+    type: belongs_to
+    via: equipmentSubtypeSizeRdbId
+  - from: Model
+    to: Configuration
+    type: has_many
+    via: configurationSequence
+  - from: Model
+    to: Specification
+    type: has_many
+    via: modelId
+  - from: Model
+    to: Value
+    type: has_many
+    via: modelRdbId
+    note: Keyed by model + year + condition + region.
+  - from: Model
+    to: Cost
+    type: has_many
+    via: modelRdbId
+    note: Keyed by model + year + configurationSequence + revision date.
+  - from: Model
+    to: RentalRate
+    type: has_many
+    via: modelRdbId
+  - from: RentalHouse
+    to: RentalRate
+    type: has_many
+    via: rental house identifier
+  - from: Model
+    to: SerialNumberVerification
+    type: has_many
+    via: modelRdbId
+    note: A serial range (low/high) resolves to a model and a year.
+  - from: Value
+    to: OptionOrExtra
+    type: has_many
+    via: options and extras selection
+  - from: Model
+    to: MarketTransaction
+    type: has_many
+    via: modelRdbId
+    contract_status: undocumented
+  - from: SavedModel
+    to: Model
+    type: belongs_to
+    via: modelRdbId
+    contract_status: undocumented
+
+gaps:
+  - >-
+    No response schemas are published. components/schemas holds one stub (`ok`), so no
+    field types, formats, required-ness, nullability or enum values are contractual. Every
+    field above is observed from a marketing-page example.
+  - >-
+    Currency is never declared. Values, costs and rental rates are returned as bare numbers
+    with no currency code; USD is implied by the North American scope but never stated.
+  - >-
+    Units are carried inside spec strings ("12 ft", "138 hp") rather than as typed
+    value/unit pairs, so a consumer must parse free text to compute with them.
