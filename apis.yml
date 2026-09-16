@@ -53,163 +53,211 @@ created: '2026-03-16'
 modified: '2026-09-06'
 specificationVersion: '0.23'
 apis:
-  - aid: equipmentwatch:taxonomy
-    name: EquipmentWatch Taxonomy API
-    description: >-
-      Foundational API providing access to EquipmentWatch's manufacturer and
-      model database, covering the taxonomy used across the broader API suite
-      for construction and heavy equipment. Published operations cover
-      classifications, categories, subtypes, sizes, manufacturers and models.
-    humanURL: https://equipmentwatch.com/api/taxonomy/
-    baseURL: https://equipmentwatchapi.com/v1
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    tags:
-      - Taxonomy
-      - Manufacturers
-      - Models
-    properties:
-      - type: Documentation
-        url: https://equipmentwatch.com/api/taxonomy/
-      - type: OpenAPI
-        url: openapi/equipmentwatch-api-openapi.yaml
-      - type: APIReference
-        url: https://docs.equipmentwatchapi.com/
-  - aid: equipmentwatch:specs
-    name: EquipmentWatch Specs API
-    description: >-
-      Access to the industry's most comprehensive database of rich machine
-      specifications for construction and heavy equipment, covering more than
-      33,000 models, parsed into spec families including weights and
-      dimensions, engine, hydraulics, axles and tires, and fluid capacities.
-    humanURL: https://equipmentwatch.com/api/specs/
-    baseURL: https://equipmentwatchapi.com/v1
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    tags:
-      - Specifications
-      - Equipment
-    properties:
-      - type: Documentation
-        url: https://equipmentwatch.com/api/specs/
-      - type: OpenAPI
-        url: openapi/equipmentwatch-api-openapi.yaml
-      - type: APIReference
-        url: https://docs.equipmentwatchapi.com/
-  - aid: equipmentwatch:verification
-    name: EquipmentWatch Verification API
-    description: >-
-      Serial number verification API supporting approximately 30,000 models of
-      construction and heavy equipment, returning year of manufacture from a
-      supplied serial number along with manufacturer interpretation notes.
-    humanURL: https://equipmentwatch.com/api/verification/
-    baseURL: https://equipmentwatchapi.com/v1
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    tags:
-      - Verification
-      - Serial Numbers
-    properties:
-      - type: Documentation
-        url: https://equipmentwatch.com/api/verification/
-      - type: OpenAPI
-        url: openapi/equipmentwatch-api-openapi.yaml
-      - type: APIReference
-        url: https://docs.equipmentwatchapi.com/
-  - aid: equipmentwatch:costs
-    name: EquipmentWatch Costs API
-    description: >-
-      Ownership and operating cost recovery rates derived from the Rental Rate
-      Blue Book, supporting equipment cost benchmarking, internal charge rate
-      calculation and FHWA rate lookup.
-    humanURL: https://equipmentwatch.com/api/costs/
-    baseURL: https://equipmentwatchapi.com/v1
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    tags:
-      - Costs
-      - Ownership Costs
-      - Rental Rates
-    properties:
-      - type: Documentation
-        url: https://equipmentwatch.com/api/costs/
-      - type: OpenAPI
-        url: openapi/equipmentwatch-api-openapi.yaml
-      - type: APIReference
-        url: https://docs.equipmentwatchapi.com/
-  - aid: equipmentwatch:values
-    name: EquipmentWatch Values API
-    description: >-
-      Current and trended market values for heavy equipment — Fair Market Value
-      (FMV), Forced Liquidation Value (FLV) and Orderly Liquidation Value (OLV)
-      — supporting valuation, appraisal and resale pricing workflows, with
-      adjustment for condition, options and extras, and region.
-    humanURL: https://equipmentwatch.com/api/values/
-    baseURL: https://equipmentwatchapi.com/v1
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    tags:
-      - Valuation
-      - Market Values
-      - Pricing
-    properties:
-      - type: Documentation
-        url: https://equipmentwatch.com/api/values/
-      - type: OpenAPI
-        url: openapi/equipmentwatch-api-openapi.yaml
-      - type: APIReference
-        url: https://docs.equipmentwatchapi.com/
-  - aid: equipmentwatch:retail-rental
-    name: EquipmentWatch Retail Rental API
-    description: >-
-      National, regional and rental-house specific equipment rental rates for
-      thousands of models across nearly every equipment rental house in North
-      America, supporting rate optimization for rental fleets and customers.
-    humanURL: https://equipmentwatch.com/api/rental/
-    baseURL: https://equipmentwatchapi.com/v1
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    tags:
-      - Rental Rates
-      - Retail
-    properties:
-      - type: Documentation
-        url: https://equipmentwatch.com/api/rental/
-      - type: OpenAPI
-        url: openapi/equipmentwatch-api-openapi.yaml
-      - type: APIReference
-        url: https://docs.equipmentwatchapi.com/
-  - aid: equipmentwatch:market-data
-    name: EquipmentWatch Market Data API
-    description: >-
-      Raw equipment sales activity (auction and resale transactions) and
-      market-derived utilization and popularity benchmarks for the heavy
-      equipment industry. Documented on the EquipmentWatch site but NOT
-      represented in the published OpenAPI contract, which carries no
-      market-data paths as of 2026-09-06.
-    humanURL: https://equipmentwatch.com/api/market-data/
-    baseURL: https://equipmentwatchapi.com/v1
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    tags:
-      - Market Data
-      - Sales
-      - Utilization
-    properties:
-      - type: Documentation
-        url: https://equipmentwatch.com/api/market-data/
-  - aid: equipmentwatch:integration
-    name: EquipmentWatch Integration API
-    description: >-
-      Read and write access to user-saved asset and group data inside the
-      EquipmentWatch application, allowing saved models and groups to be moved
-      into and out of third-party platforms. The only EquipmentWatch surface
-      with documented write operations (POST saved models, POST groups).
-      Documented on the EquipmentWatch site but NOT represented in the
-      published OpenAPI contract as of 2026-09-06.
-    humanURL: https://equipmentwatch.com/api/integration/
-    baseURL: https://equipmentwatchapi.com/v1
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    tags:
-      - Integration
-      - Saved Models
-      - Groups
-    properties:
-      - type: Documentation
-        url: https://equipmentwatch.com/api/integration/
+- aid: equipmentwatch:market-data
+  name: EquipmentWatch Market Data API
+  description: >-
+    Raw equipment sales activity (auction and resale transactions) and market-derived utilization and
+    popularity benchmarks for the heavy equipment industry. Documented on the EquipmentWatch site but
+    NOT represented in the published OpenAPI contract, which carries no market-data paths as of 2026-09-06.
+  humanURL: https://equipmentwatch.com/api/market-data/
+  baseURL: https://equipmentwatchapi.com/v1
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Market Data
+  - Sales
+  - Utilization
+  properties:
+  - type: Documentation
+    url: https://equipmentwatch.com/api/market-data/
+- aid: equipmentwatch:integration
+  name: EquipmentWatch Integration API
+  description: >-
+    Read and write access to user-saved asset and group data inside the EquipmentWatch application, allowing
+    saved models and groups to be moved into and out of third-party platforms. The only EquipmentWatch
+    surface with documented write operations (POST saved models, POST groups). Documented on the EquipmentWatch
+    site but NOT represented in the published OpenAPI contract as of 2026-09-06.
+  humanURL: https://equipmentwatch.com/api/integration/
+  baseURL: https://equipmentwatchapi.com/v1
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Integration
+  - Saved Models
+  - Group
+  tags_raw:
+  - Integration
+  - Saved Models
+  - Groups
+  properties:
+  - type: Documentation
+    url: https://equipmentwatch.com/api/integration/
+- aid: equipmentwatch:equipmentwatch-bulk-api
+  name: Equipmentwatch Bulk API
+  description: The Bulk API from Equipmentwatch — 2 operation(s) for bulk.
+  humanURL: https://equipmentwatch.com/api/taxonomy/
+  baseURL: https://equipmentwatchapi.com/v1
+  tags:
+  - Bulk
+  properties:
+  - type: OpenAPI
+    url: openapi/equipmentwatch-bulk-api-openapi.yml
+  - type: Documentation
+    url: https://equipmentwatch.com/api/taxonomy/
+  - type: APIReference
+    url: https://docs.equipmentwatchapi.com/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/specs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/verification/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/costs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/values/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/rental/
+- aid: equipmentwatch:equipmentwatch-cost-api
+  name: Equipmentwatch Cost API
+  description: The Cost API from Equipmentwatch — 3 operation(s) for cost.
+  humanURL: https://equipmentwatch.com/api/taxonomy/
+  baseURL: https://equipmentwatchapi.com/v1
+  tags:
+  - Cost
+  properties:
+  - type: OpenAPI
+    url: openapi/equipmentwatch-cost-api-openapi.yml
+  - type: Documentation
+    url: https://equipmentwatch.com/api/taxonomy/
+  - type: APIReference
+    url: https://docs.equipmentwatchapi.com/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/specs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/verification/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/costs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/values/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/rental/
+- aid: equipmentwatch:equipmentwatch-rental-api
+  name: Equipmentwatch Rental API
+  description: The Rental API from Equipmentwatch — 4 operation(s) for rental.
+  humanURL: https://equipmentwatch.com/api/taxonomy/
+  baseURL: https://equipmentwatchapi.com/v1
+  tags:
+  - Rental
+  properties:
+  - type: OpenAPI
+    url: openapi/equipmentwatch-rental-api-openapi.yml
+  - type: Documentation
+    url: https://equipmentwatch.com/api/taxonomy/
+  - type: APIReference
+    url: https://docs.equipmentwatchapi.com/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/specs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/verification/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/costs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/values/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/rental/
+- aid: equipmentwatch:equipmentwatch-specifications-api
+  name: Equipmentwatch Specifications API
+  description: The Specifications API from Equipmentwatch — 2 operation(s) for specifications.
+  humanURL: https://equipmentwatch.com/api/taxonomy/
+  baseURL: https://equipmentwatchapi.com/v1
+  tags:
+  - Specifications
+  properties:
+  - type: OpenAPI
+    url: openapi/equipmentwatch-specifications-api-openapi.yml
+  - type: Documentation
+    url: https://equipmentwatch.com/api/taxonomy/
+  - type: APIReference
+    url: https://docs.equipmentwatchapi.com/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/specs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/verification/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/costs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/values/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/rental/
+- aid: equipmentwatch:equipmentwatch-taxonomy-api
+  name: Equipmentwatch Taxonomy API
+  description: The Taxonomy API from Equipmentwatch — 6 operation(s) for taxonomy.
+  humanURL: https://equipmentwatch.com/api/taxonomy/
+  baseURL: https://equipmentwatchapi.com/v1
+  tags:
+  - Taxonomy
+  properties:
+  - type: OpenAPI
+    url: openapi/equipmentwatch-taxonomy-api-openapi.yml
+  - type: Documentation
+    url: https://equipmentwatch.com/api/taxonomy/
+  - type: APIReference
+    url: https://docs.equipmentwatchapi.com/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/specs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/verification/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/costs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/values/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/rental/
+- aid: equipmentwatch:equipmentwatch-values-api
+  name: Equipmentwatch Values API
+  description: The Values API from Equipmentwatch — 6 operation(s) for values.
+  humanURL: https://equipmentwatch.com/api/taxonomy/
+  baseURL: https://equipmentwatchapi.com/v1
+  tags:
+  - Values
+  properties:
+  - type: OpenAPI
+    url: openapi/equipmentwatch-values-api-openapi.yml
+  - type: Documentation
+    url: https://equipmentwatch.com/api/taxonomy/
+  - type: APIReference
+    url: https://docs.equipmentwatchapi.com/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/specs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/verification/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/costs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/values/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/rental/
+- aid: equipmentwatch:equipmentwatch-verification-api
+  name: Equipmentwatch Verification API
+  description: The Verification API from Equipmentwatch — 1 operation(s) for verification.
+  humanURL: https://equipmentwatch.com/api/taxonomy/
+  baseURL: https://equipmentwatchapi.com/v1
+  tags:
+  - Verification
+  properties:
+  - type: OpenAPI
+    url: openapi/equipmentwatch-verification-api-openapi.yml
+  - type: Documentation
+    url: https://equipmentwatch.com/api/taxonomy/
+  - type: APIReference
+    url: https://docs.equipmentwatchapi.com/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/specs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/verification/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/costs/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/values/
+  - type: Documentation
+    url: https://equipmentwatch.com/api/rental/
 common:
   - type: Website
     url: https://www.equipmentwatch.com/

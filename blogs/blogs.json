@@ -2,6 +2,13 @@
   "repo": "equipmentwatch",
   "feeds": [
     {
+      "source": "https://equipmentwatch.com/integrations/",
+      "feed_url": "https://equipmentwatch.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    },
+    {
       "source": "https://www.equipmentwatch.com/blog/feed/",
       "feed_url": "https://www.equipmentwatch.com/blog/feed/",
       "title": "",
@@ -9,7 +16,7 @@
       "method": "feed"
     }
   ],
-  "fetched": "2026-09-06T19:17:18Z",
+  "fetched": "2026-09-13T13:00:00Z",
   "post_count": 21,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
