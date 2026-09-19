@@ -144,6 +144,8 @@ apis:
   humanURL: https://equipmentwatch.com/api/taxonomy/
   baseURL: https://equipmentwatchapi.com/v1
   tags:
+  - Rentals
+  tags_raw:
   - Rental
   properties:
   - type: OpenAPI
@@ -168,6 +170,8 @@ apis:
   humanURL: https://equipmentwatch.com/api/taxonomy/
   baseURL: https://equipmentwatchapi.com/v1
   tags:
+  - Specification
+  tags_raw:
   - Specifications
   properties:
   - type: OpenAPI
