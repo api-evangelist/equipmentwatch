@@ -14,9 +14,16 @@
       "title": "",
       "saved": 0,
       "method": "feed"
+    },
+    {
+      "source": "https://equipmentwatch.com/feed/",
+      "feed_url": "https://equipmentwatch.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     }
   ],
-  "fetched": "2026-09-13T13:00:00Z",
+  "fetched": "2026-09-19T20:17:39Z",
   "post_count": 21,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
