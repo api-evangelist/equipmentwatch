@@ -1,0 +1,39 @@
+{
+  "provider": "equipmentwatch",
+  "sources": [
+    "_original/equipmentwatch-api-openapi.yaml"
+  ],
+  "outputs": [
+    "equipmentwatch-bulk-api-openapi.yml",
+    "equipmentwatch-cost-api-openapi.yml",
+    "equipmentwatch-rental-api-openapi.yml",
+    "equipmentwatch-specifications-api-openapi.yml",
+    "equipmentwatch-taxonomy-api-openapi.yml",
+    "equipmentwatch-values-api-openapi.yml",
+    "equipmentwatch-verification-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "equipmentwatch-api-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0; renamed 1 component key(s) illegal in 3.x (e.g. API Key)",
+    "equipmentwatch-api-openapi.yaml: declared missing tag: Bulk",
+    "equipmentwatch-api-openapi.yaml: declared missing tag: Cost",
+    "equipmentwatch-api-openapi.yaml: declared missing tag: Rental",
+    "equipmentwatch-api-openapi.yaml: declared missing tag: Specifications",
+    "equipmentwatch-api-openapi.yaml: declared missing tag: Taxonomy",
+    "equipmentwatch-api-openapi.yaml: declared missing tag: Values",
+    "equipmentwatch-api-openapi.yaml: declared missing tag: Verification",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "equipmentwatch-bulk-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "equipmentwatch-cost-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "equipmentwatch-rental-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "equipmentwatch-specifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "equipmentwatch-taxonomy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "equipmentwatch-values-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "equipmentwatch-verification-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

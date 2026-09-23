@@ -1,0 +1,60 @@
+openapi: 3.2.0
+info:
+  title: EquipmentWatch Bulk API
+  version: 1.0.0
+  description: 'The EquipmentWatch API enables integration of critical equipment data attributes - including
+
+    cost, rental, specs and value benchmarks - directly into any software or application.'
+  contact:
+    url: https://equipmentwatch.com/api/
+    email: customerservice@equipmentwatch.com
+servers:
+- url: https://equipmentwatchapi.com/v1
+  description: Primary
+- url: https://sandbox.equipmentwatchapi.com/v1
+  description: Sandbox
+security:
+- API Key: []
+tags:
+- name: Bulk
+paths:
+  /bulk/manufacturers:
+    get:
+      tags:
+      - Bulk
+      summary: Bulk Manufacturers
+      parameters:
+      - $ref: '#/components/parameters/classificationIdParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getBulkManufacturers
+      x-operation-id-source: derived
+  /bulk/models:
+    get:
+      tags:
+      - Bulk
+      summary: Bulk Models
+      parameters:
+      - $ref: '#/components/parameters/classificationIdParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getBulkModels
+      x-operation-id-source: derived
+components:
+  parameters:
+    classificationIdParam:
+      schema:
+        type: integer
+      in: query
+      name: classificationId
+      description: Classification ID.
+      required: false
+  securitySchemes:
+    API_Key:
+      type: apiKey
+      name: x-api-key
+      in: header
+externalDocs:
+  url: https://docs.equipmentwatchapi.com/

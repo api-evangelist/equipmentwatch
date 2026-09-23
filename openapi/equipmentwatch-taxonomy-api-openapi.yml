@@ -1,0 +1,292 @@
+openapi: 3.2.0
+info:
+  title: EquipmentWatch Taxonomy API
+  version: 1.0.0
+  description: 'The EquipmentWatch API enables integration of critical equipment data attributes - including
+
+    cost, rental, specs and value benchmarks - directly into any software or application.'
+  contact:
+    url: https://equipmentwatch.com/api/
+    email: customerservice@equipmentwatch.com
+servers:
+- url: https://equipmentwatchapi.com/v1
+  description: Primary
+- url: https://sandbox.equipmentwatchapi.com/v1
+  description: Sandbox
+security:
+- API Key: []
+tags:
+- name: Taxonomy
+paths:
+  /taxonomy/classifications:
+    get:
+      summary: Classifications
+      tags:
+      - Taxonomy
+      parameters:
+      - $ref: '#/components/parameters/classificationIdParam'
+      - $ref: '#/components/parameters/classificationParam'
+      - $ref: '#/components/parameters/categoryIdParam'
+      - $ref: '#/components/parameters/categoryParam'
+      - $ref: '#/components/parameters/subtypeIdParam'
+      - $ref: '#/components/parameters/subtypeParam'
+      - $ref: '#/components/parameters/sizeClassIdParam'
+      - $ref: '#/components/parameters/sizeParam'
+      - $ref: '#/components/parameters/manufacturerIdParam'
+      - $ref: '#/components/parameters/manufacturerParam'
+      - $ref: '#/components/parameters/modelIdParam'
+      - $ref: '#/components/parameters/modelParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getTaxonomyClassifications
+      x-operation-id-source: derived
+  /taxonomy/categories:
+    get:
+      tags:
+      - Taxonomy
+      summary: Categories
+      parameters:
+      - $ref: '#/components/parameters/classificationIdParam'
+      - $ref: '#/components/parameters/classificationParam'
+      - $ref: '#/components/parameters/categoryIdParam'
+      - $ref: '#/components/parameters/categoryParam'
+      - $ref: '#/components/parameters/subtypeIdParam'
+      - $ref: '#/components/parameters/subtypeParam'
+      - $ref: '#/components/parameters/sizeClassIdParam'
+      - $ref: '#/components/parameters/sizeParam'
+      - $ref: '#/components/parameters/manufacturerIdParam'
+      - $ref: '#/components/parameters/manufacturerParam'
+      - $ref: '#/components/parameters/modelIdParam'
+      - $ref: '#/components/parameters/modelParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getTaxonomyCategories
+      x-operation-id-source: derived
+  /taxonomy/subtypes:
+    get:
+      tags:
+      - Taxonomy
+      summary: Subtypes
+      parameters:
+      - $ref: '#/components/parameters/classificationIdParam'
+      - $ref: '#/components/parameters/classificationParam'
+      - $ref: '#/components/parameters/categoryIdParam'
+      - $ref: '#/components/parameters/categoryParam'
+      - $ref: '#/components/parameters/subtypeIdParam'
+      - $ref: '#/components/parameters/subtypeParam'
+      - $ref: '#/components/parameters/sizeClassIdParam'
+      - $ref: '#/components/parameters/sizeParam'
+      - $ref: '#/components/parameters/manufacturerIdParam'
+      - $ref: '#/components/parameters/manufacturerParam'
+      - $ref: '#/components/parameters/modelIdParam'
+      - $ref: '#/components/parameters/modelParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getTaxonomySubtypes
+      x-operation-id-source: derived
+  /taxonomy/sizes:
+    get:
+      tags:
+      - Taxonomy
+      summary: Sizes
+      parameters:
+      - $ref: '#/components/parameters/classificationIdParam'
+      - $ref: '#/components/parameters/classificationParam'
+      - $ref: '#/components/parameters/categoryIdParam'
+      - $ref: '#/components/parameters/categoryParam'
+      - $ref: '#/components/parameters/subtypeIdParam'
+      - $ref: '#/components/parameters/subtypeParam'
+      - $ref: '#/components/parameters/sizeClassIdParam'
+      - $ref: '#/components/parameters/sizeParam'
+      - $ref: '#/components/parameters/manufacturerIdParam'
+      - $ref: '#/components/parameters/manufacturerParam'
+      - $ref: '#/components/parameters/modelIdParam'
+      - $ref: '#/components/parameters/modelParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getTaxonomySizes
+      x-operation-id-source: derived
+  /taxonomy/manufacturers:
+    get:
+      tags:
+      - Taxonomy
+      summary: Manufacturers
+      parameters:
+      - $ref: '#/components/parameters/classificationIdParam'
+      - $ref: '#/components/parameters/classificationParam'
+      - $ref: '#/components/parameters/categoryIdParam'
+      - $ref: '#/components/parameters/categoryParam'
+      - $ref: '#/components/parameters/subtypeIdParam'
+      - $ref: '#/components/parameters/subtypeParam'
+      - $ref: '#/components/parameters/sizeClassIdParam'
+      - $ref: '#/components/parameters/sizeParam'
+      - $ref: '#/components/parameters/manufacturerIdParam'
+      - $ref: '#/components/parameters/manufacturerParam'
+      - $ref: '#/components/parameters/modelIdParam'
+      - $ref: '#/components/parameters/modelParam'
+      - schema:
+          type: string
+        in: query
+        name: partialMatch
+        description: Partial match manufacturer and model name searches.
+        required: false
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getTaxonomyManufacturers
+      x-operation-id-source: derived
+  /taxonomy/models:
+    get:
+      tags:
+      - Taxonomy
+      summary: Models
+      parameters:
+      - $ref: '#/components/parameters/classificationIdParam'
+      - $ref: '#/components/parameters/classificationParam'
+      - $ref: '#/components/parameters/categoryIdParam'
+      - $ref: '#/components/parameters/categoryParam'
+      - $ref: '#/components/parameters/subtypeIdParam'
+      - $ref: '#/components/parameters/subtypeParam'
+      - $ref: '#/components/parameters/sizeClassIdParam'
+      - $ref: '#/components/parameters/sizeParam'
+      - $ref: '#/components/parameters/manufacturerIdParam'
+      - $ref: '#/components/parameters/manufacturerParam'
+      - $ref: '#/components/parameters/modelIdParam'
+      - $ref: '#/components/parameters/modelParam'
+      - schema:
+          type: boolean
+        in: query
+        name: partialMatch
+        description: Partial match manufacturer and model name searches.
+        required: false
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getTaxonomyModels
+      x-operation-id-source: derived
+components:
+  parameters:
+    offsetParam:
+      schema:
+        type: integer
+        minimum: 0
+      in: query
+      name: offset
+      description: Offset is used to skip some number of items before beginning to return results. If offset is not specified, 0 items will be skipped in the result by default.
+      required: false
+    modelParam:
+      schema:
+        type: string
+      in: query
+      name: model
+      description: Model name.
+      required: false
+    sizeClassIdParam:
+      schema:
+        type: integer
+      in: query
+      name: sizeClassId
+      description: Size ID.
+      required: false
+    subtypeParam:
+      schema:
+        type: string
+      in: query
+      name: subtype
+      description: Subtype name.
+      required: false
+    modelIdParam:
+      schema:
+        type: integer
+      in: query
+      name: modelId
+      description: Model ID.
+      required: false
+    categoryIdParam:
+      schema:
+        type: integer
+      in: query
+      name: categoryId
+      description: Category ID.
+      required: false
+    classificationParam:
+      schema:
+        type: string
+      in: query
+      name: classification
+      description: Classification name.
+      required: false
+    limitParam:
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+      in: query
+      name: limit
+      description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
+      required: false
+    sizeParam:
+      schema:
+        type: string
+      in: query
+      name: size
+      description: Size name.
+      required: false
+    categoryParam:
+      schema:
+        type: string
+      in: query
+      name: category
+      description: Category name.
+      required: false
+    manufacturerIdParam:
+      schema:
+        type: integer
+      in: query
+      name: manufacturerId
+      description: Manufacturer ID.
+      required: false
+    classificationIdParam:
+      schema:
+        type: integer
+      in: query
+      name: classificationId
+      description: Classification ID.
+      required: false
+    subtypeIdParam:
+      schema:
+        type: integer
+      in: query
+      name: subtypeId
+      description: Subtype ID.
+      required: false
+    manufacturerParam:
+      schema:
+        type: string
+      in: query
+      name: manufacturer
+      description: Manufacturer name.
+      required: false
+  securitySchemes:
+    API_Key:
+      type: apiKey
+      name: x-api-key
+      in: header
+externalDocs:
+  url: https://docs.equipmentwatchapi.com/

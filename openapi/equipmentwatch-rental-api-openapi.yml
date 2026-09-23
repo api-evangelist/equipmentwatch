@@ -1,0 +1,210 @@
+openapi: 3.2.0
+info:
+  title: EquipmentWatch Rental API
+  version: 1.0.0
+  description: 'The EquipmentWatch API enables integration of critical equipment data attributes - including
+
+    cost, rental, specs and value benchmarks - directly into any software or application.'
+  contact:
+    url: https://equipmentwatch.com/api/
+    email: customerservice@equipmentwatch.com
+servers:
+- url: https://equipmentwatchapi.com/v1
+  description: Primary
+- url: https://sandbox.equipmentwatchapi.com/v1
+  description: Sandbox
+security:
+- API Key: []
+tags:
+- name: Rental
+paths:
+  /rental/rentalhouserates:
+    get:
+      tags:
+      - Rental
+      summary: Rental House Rates
+      parameters:
+      - schema:
+          type: integer
+        in: query
+        name: sizeClassId
+        description: Size ID. Required if modelId not specified.
+        required: false
+      - schema:
+          type: integer
+        in: query
+        name: modelId
+        description: Model ID. Required if sizeClassId not specified.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: participantCode
+        description: Participant Code.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: zipCode
+        description: Zip Code.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: distance
+        description: Search Radius (mi).
+        required: false
+      responses:
+        '200':
+          description: OK
+      operationId: getRentalRentalhouserates
+      x-operation-id-source: derived
+  /rental/rentalhousetaxonomy:
+    get:
+      tags:
+      - Rental
+      summary: Rental House Taxonomy
+      parameters:
+      - schema:
+          type: integer
+        in: query
+        name: sizeClassId
+        description: Size Class ID.
+        required: true
+      - schema:
+          type: integer
+        in: query
+        name: modelId
+        description: Model ID.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: participantCode
+        description: Participant Code.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: participantName
+        description: Participant Name.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: city
+        description: City.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: state
+        description: State.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: zipCode
+        description: Zip Code.
+        required: false
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getRentalRentalhousetaxonomy
+      x-operation-id-source: derived
+  /rental/rentalhouses:
+    get:
+      tags:
+      - Rental
+      summary: Rental Houses
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: participantCode
+        description: Participant Code.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: participantName
+        description: Participant Name.
+        required: false
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getRentalRentalhouses
+      x-operation-id-source: derived
+  /rental/rentalrates:
+    get:
+      tags:
+      - Rental
+      summary: Rental Rates
+      parameters:
+      - $ref: '#/components/parameters/sizeClassIdRequiredParam'
+      - schema:
+          type: string
+        in: query
+        name: region
+        description: Region.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: state
+        description: State.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: country
+        description: country.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: revisionDate
+        description: Data collection date in YYYY-MM-DD format.
+        required: false
+      responses:
+        '200':
+          description: OK
+      operationId: getRentalRentalrates
+      x-operation-id-source: derived
+components:
+  parameters:
+    offsetParam:
+      schema:
+        type: integer
+        minimum: 0
+      in: query
+      name: offset
+      description: Offset is used to skip some number of items before beginning to return results. If offset is not specified, 0 items will be skipped in the result by default.
+      required: false
+    sizeClassIdRequiredParam:
+      schema:
+        type: integer
+      in: query
+      name: sizeClassId
+      description: Size ID.
+      required: true
+    limitParam:
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+      in: query
+      name: limit
+      description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
+      required: false
+  securitySchemes:
+    API_Key:
+      type: apiKey
+      name: x-api-key
+      in: header
+externalDocs:
+  url: https://docs.equipmentwatchapi.com/

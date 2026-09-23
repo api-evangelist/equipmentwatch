@@ -1,0 +1,69 @@
+openapi: 3.2.0
+info:
+  title: EquipmentWatch Verification API
+  version: 1.0.0
+  description: 'The EquipmentWatch API enables integration of critical equipment data attributes - including
+
+    cost, rental, specs and value benchmarks - directly into any software or application.'
+  contact:
+    url: https://equipmentwatch.com/api/
+    email: customerservice@equipmentwatch.com
+servers:
+- url: https://equipmentwatchapi.com/v1
+  description: Primary
+- url: https://sandbox.equipmentwatchapi.com/v1
+  description: Sandbox
+security:
+- API Key: []
+tags:
+- name: Verification
+paths:
+  /verification/serialnumberverification:
+    get:
+      tags:
+      - Verification
+      summary: Serial Number
+      description: Serial Number Verification
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: serialNumber
+        description: Serial Number.
+        required: true
+      - $ref: '#/components/parameters/manufacturerParam'
+      - $ref: '#/components/parameters/modelParam'
+      - schema:
+          type: boolean
+        in: query
+        name: survey
+        description: Include survey derrived results.
+        required: false
+      responses:
+        '200':
+          description: OK
+      operationId: getVerificationSerialnumberverification
+      x-operation-id-source: derived
+components:
+  parameters:
+    modelParam:
+      schema:
+        type: string
+      in: query
+      name: model
+      description: Model name.
+      required: false
+    manufacturerParam:
+      schema:
+        type: string
+      in: query
+      name: manufacturer
+      description: Manufacturer name.
+      required: false
+  securitySchemes:
+    API_Key:
+      type: apiKey
+      name: x-api-key
+      in: header
+externalDocs:
+  url: https://docs.equipmentwatchapi.com/

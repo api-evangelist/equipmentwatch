@@ -1,0 +1,245 @@
+openapi: 3.2.0
+info:
+  title: EquipmentWatch Values API
+  version: 1.0.0
+  description: 'The EquipmentWatch API enables integration of critical equipment data attributes - including
+
+    cost, rental, specs and value benchmarks - directly into any software or application.'
+  contact:
+    url: https://equipmentwatch.com/api/
+    email: customerservice@equipmentwatch.com
+servers:
+- url: https://equipmentwatchapi.com/v1
+  description: Primary
+- url: https://sandbox.equipmentwatchapi.com/v1
+  description: Sandbox
+security:
+- API Key: []
+tags:
+- name: Values
+paths:
+  /values/value:
+    get:
+      tags:
+      - Values
+      summary: Value
+      parameters:
+      - $ref: '#/components/parameters/modelIdRequiredParam'
+      - $ref: '#/components/parameters/yearParam'
+      - schema:
+          type: string
+        in: query
+        name: usage
+        description: Asset usage in hours/miles/kilometers.
+        required: false
+      - $ref: '#/components/parameters/valueConditionParam'
+      - schema:
+          type: string
+        in: query
+        name: country
+        description: Country code.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: region
+        description: U.S. state or Canada postal abbreviation.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: olvFactor
+        description: OLV estimation factor
+        required: false
+      - $ref: '#/components/parameters/valuesOlvBasisParam'
+      - schema:
+          type: string
+        in: query
+        name: revisionDate
+        description: Data collection date in YYYY-MM-DD format.
+        required: false
+      responses:
+        '200':
+          description: OK
+      operationId: getValuesValue
+      x-operation-id-source: derived
+  /values/trending:
+    get:
+      tags:
+      - Values
+      summary: Value Trends
+      parameters:
+      - $ref: '#/components/parameters/modelIdRequiredParam'
+      - $ref: '#/components/parameters/yearParam'
+      - schema:
+          type: string
+        in: query
+        name: usage
+        description: Asset usage in hours/miles/kilometers.
+        required: false
+      - $ref: '#/components/parameters/valueConditionParam'
+      - schema:
+          type: string
+        in: query
+        name: country
+        description: Country code.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: region
+        description: U.S. state or Canada postal abbreviation.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: olvFactor
+        description: OLV estimation factor
+        required: false
+      - $ref: '#/components/parameters/valuesOlvBasisParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getValuesTrending
+      x-operation-id-source: derived
+  /values/options:
+    get:
+      tags:
+      - Values
+      summary: Options
+      parameters:
+      - $ref: '#/components/parameters/sizeClassIdRequiredParam'
+      - $ref: '#/components/parameters/yearRequiredParam'
+      - schema:
+          type: string
+        in: query
+        name: optionFamily
+        description: Option Family name.
+        required: false
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getValuesOptions
+      x-operation-id-source: derived
+  /values/options/families:
+    get:
+      tags:
+      - Values
+      summary: Option Families
+      parameters:
+      - $ref: '#/components/parameters/sizeClassIdRequiredParam'
+      - $ref: '#/components/parameters/yearParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getValuesOptionsFamilies
+      x-operation-id-source: derived
+  /values/condition:
+    get:
+      tags:
+      - Values
+      summary: Condition Adjustments
+      parameters:
+      - $ref: '#/components/parameters/modelIdRequiredParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getValuesCondition
+      x-operation-id-source: derived
+  /values/region:
+    get:
+      tags:
+      - Values
+      summary: Region Adjustments
+      parameters:
+      - $ref: '#/components/parameters/modelIdRequiredParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getValuesRegion
+      x-operation-id-source: derived
+components:
+  parameters:
+    offsetParam:
+      schema:
+        type: integer
+        minimum: 0
+      in: query
+      name: offset
+      description: Offset is used to skip some number of items before beginning to return results. If offset is not specified, 0 items will be skipped in the result by default.
+      required: false
+    valuesOlvBasisParam:
+      schema:
+        type: string
+        enum:
+        - FMV
+        - FLV
+      in: query
+      name: olvBasis
+      description: Basis of OLV estimate. "FMV" or "FLV".
+      required: false
+    sizeClassIdRequiredParam:
+      schema:
+        type: integer
+      in: query
+      name: sizeClassId
+      description: Size ID.
+      required: true
+    valueConditionParam:
+      schema:
+        type: string
+        enum:
+        - Excellent
+        - Very Good
+        - Good
+        - Fair
+        - Poor
+      in: query
+      name: condition
+      description: Asset Condition.
+      required: false
+    yearRequiredParam:
+      schema:
+        type: string
+      in: query
+      name: year
+      description: Model year.
+      required: true
+    limitParam:
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+      in: query
+      name: limit
+      description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
+      required: false
+    yearParam:
+      schema:
+        type: string
+      in: query
+      name: year
+      description: Model year.
+      required: false
+    modelIdRequiredParam:
+      schema:
+        type: integer
+      in: query
+      name: modelId
+      description: Model ID.
+      required: true
+  securitySchemes:
+    API_Key:
+      type: apiKey
+      name: x-api-key
+      in: header
+externalDocs:
+  url: https://docs.equipmentwatchapi.com/

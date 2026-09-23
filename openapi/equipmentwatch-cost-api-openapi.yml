@@ -1,0 +1,294 @@
+openapi: 3.2.0
+info:
+  title: EquipmentWatch Cost API
+  version: 1.0.0
+  description: 'The EquipmentWatch API enables integration of critical equipment data attributes - including
+
+    cost, rental, specs and value benchmarks - directly into any software or application.'
+  contact:
+    url: https://equipmentwatch.com/api/
+    email: customerservice@equipmentwatch.com
+servers:
+- url: https://equipmentwatchapi.com/v1
+  description: Primary
+- url: https://sandbox.equipmentwatchapi.com/v1
+  description: Sandbox
+security:
+- API Key: []
+tags:
+- name: Cost
+paths:
+  /cost/configurations:
+    get:
+      tags:
+      - Cost
+      summary: Configurations
+      parameters:
+      - schema:
+          type: integer
+        in: query
+        name: modelId
+        description: Model ID. Required if manufacturerId and subtypeId are not specified.
+        required: false
+      - $ref: '#/components/parameters/yearParam'
+      - schema:
+          type: integer
+        in: query
+        name: manufacturerId
+        description: Manufacturer ID. Required if modelId is not specified.
+        required: false
+      - schema:
+          type: integer
+        in: query
+        name: subtypeId
+        description: Subtype ID. Required if modelId is not specified.
+        required: false
+      - $ref: '#/components/parameters/configurationSequenceParam'
+      - $ref: '#/components/parameters/costRevisionDateParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getCostConfigurations
+      x-operation-id-source: derived
+  /cost/cost-recovery:
+    get:
+      tags:
+      - Cost
+      summary: Cost Recovery
+      parameters:
+      - $ref: '#/components/parameters/modelIdRequiredParam'
+      - $ref: '#/components/parameters/configurationSequenceRequiredParam'
+      - $ref: '#/components/parameters/yearParam'
+      - $ref: '#/components/parameters/costRevisionDateParam'
+      - schema:
+          type: string
+        in: query
+        name: operatingAdjustment
+        description: Operating adjustment multiplier. For example, to increase by 5% use 1.05 as the value.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: ownershipAdjustment
+        description: Ownership adjustment multiplier. For example, to increase by 5% use 1.05 as the value.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: region
+        description: Region.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: regionId
+        description: Region Id.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: city
+        description: City.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: cityId
+        description: City Id.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: organizationId
+        description: Organization Id.
+        required: false
+      responses:
+        '200':
+          description: OK
+      operationId: getCostCostRecovery
+      x-operation-id-source: derived
+  /cost/icr:
+    get:
+      tags:
+      - Cost
+      summary: ICR
+      description: Internal Charge Rate
+      parameters:
+      - $ref: '#/components/parameters/modelIdRequiredParam'
+      - $ref: '#/components/parameters/configurationSequenceRequiredParam'
+      - $ref: '#/components/parameters/costRevisionDateParam'
+      - schema:
+          type: string
+        in: query
+        name: originalPrice
+        description: Price for the equipment at the time of purchase (excluding discount, freight, and sales tax).
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: fuel
+        description: Price per gallon of fuel.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: annualUseHours
+        description: Average hours used per year.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: economicLifeHours
+        description: Hours of expected use before needing replacement or overhaul.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: salesTax
+        description: Sales tax percent paid at the time of purchase. For example, use 0.05 to represent 5%.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: freightCosts
+        description: Amount paid to ship the equipment after purchase.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: discount
+        description: Percent discounted from the price of the machine. For example, use 0.05 to represent 5%.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: salvage
+        description: Value at the end of equipment's economic life.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: resaleValue
+        description: Current market value of the equipment.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: annualOverhead
+        description: Amount of overhead costs, on average, for the equipment in a given year.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: annualOverhaulLaborHours
+        description: Number of labor hours, on average, required to overhaul the equipment in a given year.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: annualOverhaulPartsCost
+        description: Cost of parts, on average, to overhaul the equipment each year.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: annualFieldLaborHours
+        description: Number of labor hours required, on average, to make regular operating repairs on the equipment each year.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: annualFieldRepairPartsCost
+        description: Cost of parts, on average, to make regular operating repairs on the equipment each year.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: annualSupplyParts
+        description: Cost of supply parts, on average, for the equipment each year.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: newTireCost
+        description: Cost of a new set of tires for the equipment.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: tireLifeHours
+        description: Number of hours new tires are expected to last before needing replacement.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: annualGEC
+        description: Average cost for any ground engaging components, repair and/or replacement costs each year.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: primaryFuelConsumption
+        description: Fuel/Electrical (gph/KWh) consumption of the primary engine of the equipment.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: hourlyLubeCost
+        description: Cost of lube for the equipment per hour of use.
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: mechanicWages
+        description: Average cost per hour paid to the mechanic.
+        required: false
+      responses:
+        '200':
+          description: OK
+      operationId: getCostIcr
+      x-operation-id-source: derived
+components:
+  parameters:
+    configurationSequenceRequiredParam:
+      schema:
+        type: string
+      in: query
+      name: configurationSequence
+      description: Configuration Sequence.
+      required: true
+    costRevisionDateParam:
+      schema:
+        type: string
+      in: query
+      name: date
+      description: Cost revision date in YYYY-MM-DD format. If not specified, most recent date will be returned.
+      required: false
+    configurationSequenceParam:
+      schema:
+        type: string
+      in: query
+      name: configurationSequence
+      description: Configuration Sequence.
+      required: false
+    yearParam:
+      schema:
+        type: string
+      in: query
+      name: year
+      description: Model year.
+      required: false
+    modelIdRequiredParam:
+      schema:
+        type: integer
+      in: query
+      name: modelId
+      description: Model ID.
+      required: true
+  securitySchemes:
+    API_Key:
+      type: apiKey
+      name: x-api-key
+      in: header
+externalDocs:
+  url: https://docs.equipmentwatchapi.com/

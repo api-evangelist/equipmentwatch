@@ -1,0 +1,88 @@
+openapi: 3.2.0
+info:
+  title: EquipmentWatch Specifications API
+  version: 1.0.0
+  description: 'The EquipmentWatch API enables integration of critical equipment data attributes - including
+
+    cost, rental, specs and value benchmarks - directly into any software or application.'
+  contact:
+    url: https://equipmentwatch.com/api/
+    email: customerservice@equipmentwatch.com
+servers:
+- url: https://equipmentwatchapi.com/v1
+  description: Primary
+- url: https://sandbox.equipmentwatchapi.com/v1
+  description: Sandbox
+security:
+- API Key: []
+tags:
+- name: Specifications
+paths:
+  /specs/basic:
+    get:
+      tags:
+      - Specifications
+      summary: Basic Specs
+      description: Basic Specifications
+      parameters:
+      - $ref: '#/components/parameters/modelIdRequiredParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getSpecsBasic
+      x-operation-id-source: derived
+  /specs/dimensions:
+    get:
+      x-internal: true
+      tags:
+      - Specifications
+      summary: Dimension Specs
+      parameters:
+      - $ref: '#/components/parameters/sizeClassIdRequiredParam'
+      responses:
+        '200':
+          description: OK
+      operationId: getSpecsDimensions
+      x-operation-id-source: derived
+components:
+  parameters:
+    offsetParam:
+      schema:
+        type: integer
+        minimum: 0
+      in: query
+      name: offset
+      description: Offset is used to skip some number of items before beginning to return results. If offset is not specified, 0 items will be skipped in the result by default.
+      required: false
+    sizeClassIdRequiredParam:
+      schema:
+        type: integer
+      in: query
+      name: sizeClassId
+      description: Size ID.
+      required: true
+    limitParam:
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+      in: query
+      name: limit
+      description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
+      required: false
+    modelIdRequiredParam:
+      schema:
+        type: integer
+      in: query
+      name: modelId
+      description: Model ID.
+      required: true
+  securitySchemes:
+    API_Key:
+      type: apiKey
+      name: x-api-key
+      in: header
+externalDocs:
+  url: https://docs.equipmentwatchapi.com/
