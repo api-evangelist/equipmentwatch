@@ -63,6 +63,13 @@ components:
       name: sizeClassId
       description: Size ID.
       required: true
+    modelIdRequiredParam:
+      schema:
+        type: integer
+      in: query
+      name: modelId
+      description: Model ID.
+      required: true
     limitParam:
       schema:
         type: integer
@@ -72,13 +79,6 @@ components:
       name: limit
       description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
       required: false
-    modelIdRequiredParam:
-      schema:
-        type: integer
-      in: query
-      name: modelId
-      description: Model ID.
-      required: true
   securitySchemes:
     API_Key:
       type: apiKey

@@ -250,20 +250,6 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    configurationSequenceRequiredParam:
-      schema:
-        type: string
-      in: query
-      name: configurationSequence
-      description: Configuration Sequence.
-      required: true
-    costRevisionDateParam:
-      schema:
-        type: string
-      in: query
-      name: date
-      description: Cost revision date in YYYY-MM-DD format. If not specified, most recent date will be returned.
-      required: false
     configurationSequenceParam:
       schema:
         type: string
@@ -271,13 +257,13 @@ components:
       name: configurationSequence
       description: Configuration Sequence.
       required: false
-    yearParam:
+    configurationSequenceRequiredParam:
       schema:
         type: string
       in: query
-      name: year
-      description: Model year.
-      required: false
+      name: configurationSequence
+      description: Configuration Sequence.
+      required: true
     modelIdRequiredParam:
       schema:
         type: integer
@@ -285,6 +271,20 @@ components:
       name: modelId
       description: Model ID.
       required: true
+    yearParam:
+      schema:
+        type: string
+      in: query
+      name: year
+      description: Model year.
+      required: false
+    costRevisionDateParam:
+      schema:
+        type: string
+      in: query
+      name: date
+      description: Cost revision date in YYYY-MM-DD format. If not specified, most recent date will be returned.
+      required: false
   securitySchemes:
     API_Key:
       type: apiKey
