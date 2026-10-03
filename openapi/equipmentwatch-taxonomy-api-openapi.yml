@@ -182,6 +182,22 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    limitParam:
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+      in: query
+      name: limit
+      description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
+      required: false
+    classificationParam:
+      schema:
+        type: string
+      in: query
+      name: classification
+      description: Classification name.
+      required: false
     offsetParam:
       schema:
         type: integer
@@ -197,78 +213,6 @@ components:
       name: classificationId
       description: Classification ID.
       required: false
-    manufacturerParam:
-      schema:
-        type: string
-      in: query
-      name: manufacturer
-      description: Manufacturer name.
-      required: false
-    modelParam:
-      schema:
-        type: string
-      in: query
-      name: model
-      description: Model name.
-      required: false
-    sizeClassIdParam:
-      schema:
-        type: integer
-      in: query
-      name: sizeClassId
-      description: Size ID.
-      required: false
-    categoryParam:
-      schema:
-        type: string
-      in: query
-      name: category
-      description: Category name.
-      required: false
-    subtypeIdParam:
-      schema:
-        type: integer
-      in: query
-      name: subtypeId
-      description: Subtype ID.
-      required: false
-    classificationParam:
-      schema:
-        type: string
-      in: query
-      name: classification
-      description: Classification name.
-      required: false
-    sizeParam:
-      schema:
-        type: string
-      in: query
-      name: size
-      description: Size name.
-      required: false
-    subtypeParam:
-      schema:
-        type: string
-      in: query
-      name: subtype
-      description: Subtype name.
-      required: false
-    categoryIdParam:
-      schema:
-        type: integer
-      in: query
-      name: categoryId
-      description: Category ID.
-      required: false
-    limitParam:
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 50
-      in: query
-      name: limit
-      description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
-      required: false
     manufacturerIdParam:
       schema:
         type: integer
@@ -282,6 +226,62 @@ components:
       in: query
       name: modelId
       description: Model ID.
+      required: false
+    sizeParam:
+      schema:
+        type: string
+      in: query
+      name: size
+      description: Size name.
+      required: false
+    sizeClassIdParam:
+      schema:
+        type: integer
+      in: query
+      name: sizeClassId
+      description: Size ID.
+      required: false
+    subtypeIdParam:
+      schema:
+        type: integer
+      in: query
+      name: subtypeId
+      description: Subtype ID.
+      required: false
+    subtypeParam:
+      schema:
+        type: string
+      in: query
+      name: subtype
+      description: Subtype name.
+      required: false
+    categoryParam:
+      schema:
+        type: string
+      in: query
+      name: category
+      description: Category name.
+      required: false
+    modelParam:
+      schema:
+        type: string
+      in: query
+      name: model
+      description: Model name.
+      required: false
+    manufacturerParam:
+      schema:
+        type: string
+      in: query
+      name: manufacturer
+      description: Manufacturer name.
+      required: false
+    categoryIdParam:
+      schema:
+        type: integer
+      in: query
+      name: categoryId
+      description: Category ID.
       required: false
   securitySchemes:
     API_Key:

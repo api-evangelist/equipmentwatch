@@ -168,6 +168,15 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    limitParam:
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+      in: query
+      name: limit
+      description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
+      required: false
     offsetParam:
       schema:
         type: integer
@@ -186,20 +195,6 @@ components:
       name: olvBasis
       description: Basis of OLV estimate. "FMV" or "FLV".
       required: false
-    yearRequiredParam:
-      schema:
-        type: string
-      in: query
-      name: year
-      description: Model year.
-      required: true
-    modelIdRequiredParam:
-      schema:
-        type: integer
-      in: query
-      name: modelId
-      description: Model ID.
-      required: true
     valueConditionParam:
       schema:
         type: string
@@ -213,6 +208,13 @@ components:
       name: condition
       description: Asset Condition.
       required: false
+    modelIdRequiredParam:
+      schema:
+        type: integer
+      in: query
+      name: modelId
+      description: Model ID.
+      required: true
     yearParam:
       schema:
         type: string
@@ -220,6 +222,13 @@ components:
       name: year
       description: Model year.
       required: false
+    yearRequiredParam:
+      schema:
+        type: string
+      in: query
+      name: year
+      description: Model year.
+      required: true
     sizeClassIdRequiredParam:
       schema:
         type: integer
@@ -227,15 +236,6 @@ components:
       name: sizeClassId
       description: Size ID.
       required: true
-    limitParam:
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 50
-      in: query
-      name: limit
-      description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
-      required: false
   securitySchemes:
     API_Key:
       type: apiKey
