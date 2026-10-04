@@ -191,34 +191,12 @@ components:
       name: limit
       description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
       required: false
-    classificationParam:
+    manufacturerParam:
       schema:
         type: string
       in: query
-      name: classification
-      description: Classification name.
-      required: false
-    offsetParam:
-      schema:
-        type: integer
-        minimum: 0
-      in: query
-      name: offset
-      description: Offset is used to skip some number of items before beginning to return results. If offset is not specified, 0 items will be skipped in the result by default.
-      required: false
-    classificationIdParam:
-      schema:
-        type: integer
-      in: query
-      name: classificationId
-      description: Classification ID.
-      required: false
-    manufacturerIdParam:
-      schema:
-        type: integer
-      in: query
-      name: manufacturerId
-      description: Manufacturer ID.
+      name: manufacturer
+      description: Manufacturer name.
       required: false
     modelIdParam:
       schema:
@@ -234,33 +212,19 @@ components:
       name: size
       description: Size name.
       required: false
-    sizeClassIdParam:
-      schema:
-        type: integer
-      in: query
-      name: sizeClassId
-      description: Size ID.
-      required: false
-    subtypeIdParam:
-      schema:
-        type: integer
-      in: query
-      name: subtypeId
-      description: Subtype ID.
-      required: false
-    subtypeParam:
-      schema:
-        type: string
-      in: query
-      name: subtype
-      description: Subtype name.
-      required: false
     categoryParam:
       schema:
         type: string
       in: query
       name: category
       description: Category name.
+      required: false
+    sizeClassIdParam:
+      schema:
+        type: integer
+      in: query
+      name: sizeClassId
+      description: Size ID.
       required: false
     modelParam:
       schema:
@@ -269,12 +233,12 @@ components:
       name: model
       description: Model name.
       required: false
-    manufacturerParam:
+    subtypeParam:
       schema:
         type: string
       in: query
-      name: manufacturer
-      description: Manufacturer name.
+      name: subtype
+      description: Subtype name.
       required: false
     categoryIdParam:
       schema:
@@ -282,6 +246,42 @@ components:
       in: query
       name: categoryId
       description: Category ID.
+      required: false
+    classificationParam:
+      schema:
+        type: string
+      in: query
+      name: classification
+      description: Classification name.
+      required: false
+    subtypeIdParam:
+      schema:
+        type: integer
+      in: query
+      name: subtypeId
+      description: Subtype ID.
+      required: false
+    offsetParam:
+      schema:
+        type: integer
+        minimum: 0
+      in: query
+      name: offset
+      description: Offset is used to skip some number of items before beginning to return results. If offset is not specified, 0 items will be skipped in the result by default.
+      required: false
+    manufacturerIdParam:
+      schema:
+        type: integer
+      in: query
+      name: manufacturerId
+      description: Manufacturer ID.
+      required: false
+    classificationIdParam:
+      schema:
+        type: integer
+      in: query
+      name: classificationId
+      description: Classification ID.
       required: false
   securitySchemes:
     API_Key:

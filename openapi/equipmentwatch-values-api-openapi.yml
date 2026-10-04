@@ -177,23 +177,12 @@ components:
       name: limit
       description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
       required: false
-    offsetParam:
-      schema:
-        type: integer
-        minimum: 0
-      in: query
-      name: offset
-      description: Offset is used to skip some number of items before beginning to return results. If offset is not specified, 0 items will be skipped in the result by default.
-      required: false
-    valuesOlvBasisParam:
+    yearParam:
       schema:
         type: string
-        enum:
-        - FMV
-        - FLV
       in: query
-      name: olvBasis
-      description: Basis of OLV estimate. "FMV" or "FLV".
+      name: year
+      description: Model year.
       required: false
     valueConditionParam:
       schema:
@@ -208,6 +197,16 @@ components:
       name: condition
       description: Asset Condition.
       required: false
+    valuesOlvBasisParam:
+      schema:
+        type: string
+        enum:
+        - FMV
+        - FLV
+      in: query
+      name: olvBasis
+      description: Basis of OLV estimate. "FMV" or "FLV".
+      required: false
     modelIdRequiredParam:
       schema:
         type: integer
@@ -215,12 +214,13 @@ components:
       name: modelId
       description: Model ID.
       required: true
-    yearParam:
+    offsetParam:
       schema:
-        type: string
+        type: integer
+        minimum: 0
       in: query
-      name: year
-      description: Model year.
+      name: offset
+      description: Offset is used to skip some number of items before beginning to return results. If offset is not specified, 0 items will be skipped in the result by default.
       required: false
     yearRequiredParam:
       schema:

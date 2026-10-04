@@ -46,19 +46,19 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    modelParam:
-      schema:
-        type: string
-      in: query
-      name: model
-      description: Model name.
-      required: false
     manufacturerParam:
       schema:
         type: string
       in: query
       name: manufacturer
       description: Manufacturer name.
+      required: false
+    modelParam:
+      schema:
+        type: string
+      in: query
+      name: model
+      description: Model name.
       required: false
   securitySchemes:
     API_Key:

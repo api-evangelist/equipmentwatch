@@ -257,12 +257,12 @@ components:
       name: date
       description: Cost revision date in YYYY-MM-DD format. If not specified, most recent date will be returned.
       required: false
-    modelIdRequiredParam:
+    configurationSequenceRequiredParam:
       schema:
-        type: integer
+        type: string
       in: query
-      name: modelId
-      description: Model ID.
+      name: configurationSequence
+      description: Configuration Sequence.
       required: true
     yearParam:
       schema:
@@ -271,12 +271,12 @@ components:
       name: year
       description: Model year.
       required: false
-    configurationSequenceRequiredParam:
+    modelIdRequiredParam:
       schema:
-        type: string
+        type: integer
       in: query
-      name: configurationSequence
-      description: Configuration Sequence.
+      name: modelId
+      description: Model ID.
       required: true
     configurationSequenceParam:
       schema:

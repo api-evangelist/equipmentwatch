@@ -177,6 +177,14 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    offsetParam:
+      schema:
+        type: integer
+        minimum: 0
+      in: query
+      name: offset
+      description: Offset is used to skip some number of items before beginning to return results. If offset is not specified, 0 items will be skipped in the result by default.
+      required: false
     limitParam:
       schema:
         type: integer
@@ -185,14 +193,6 @@ components:
       in: query
       name: limit
       description: Parameter is used to limit the number of results returned in the response (max 50). If limit is not specified, 50 items will be returned in the result by default.
-      required: false
-    offsetParam:
-      schema:
-        type: integer
-        minimum: 0
-      in: query
-      name: offset
-      description: Offset is used to skip some number of items before beginning to return results. If offset is not specified, 0 items will be skipped in the result by default.
       required: false
     sizeClassIdRequiredParam:
       schema:
