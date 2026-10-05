@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.equipmentwatchapi.com/openapi.yaml",
+ "requested_url": "https://docs.equipmentwatchapi.com/openapi.yaml",
+ "status": 200,
+ "content_type": "binary/octet-stream",
+ "bytes": 28638,
+ "sha256": "2094732671eb04ad3e35356b11c0cc9a0d5321d416af6202876968fe82d6799d",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
