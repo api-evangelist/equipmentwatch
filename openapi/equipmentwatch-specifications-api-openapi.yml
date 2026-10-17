@@ -56,6 +56,13 @@ components:
       name: offset
       description: Offset is used to skip some number of items before beginning to return results. If offset is not specified, 0 items will be skipped in the result by default.
       required: false
+    sizeClassIdRequiredParam:
+      schema:
+        type: integer
+      in: query
+      name: sizeClassId
+      description: Size ID.
+      required: true
     limitParam:
       schema:
         type: integer
@@ -71,13 +78,6 @@ components:
       in: query
       name: modelId
       description: Model ID.
-      required: true
-    sizeClassIdRequiredParam:
-      schema:
-        type: integer
-      in: query
-      name: sizeClassId
-      description: Size ID.
       required: true
   securitySchemes:
     API_Key:
