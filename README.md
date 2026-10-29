@@ -1,4 +1,4 @@
-# Equipmentwatch (equipmentwatch)
+# Equipmentwatch
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,104 +64,129 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-EquipmentWatch (a Fusable brand) provides construction and equipment data APIs that deliver rental rates, ownership costs, market values, and specifications for heavy equipment. Their data is used by contractors, equipment dealers, rental houses, and insurance professionals to make informed decisions about equipment valuation, procurement, and rental.
+EquipmentWatch (a Fusable brand, operated by Randall-Reilly, LLC) provides construction and equipment data APIs that deliver rental rates, ownership and operating costs, market values, machine specifications, serial-number verification and raw market transaction data for heavy equipment. Their data is used by contractors, equipment dealers, rental houses, lenders and insurance professionals to make informed decisions about equipment valuation, procurement, cost recovery and rental rate setting. The EquipmentWatch API is published as a single OpenAPI 3.0.3 contract at docs.equipmentwatchapi.com covering the Taxonomy, Values, Specifications, Rental, Verification, Cost and Bulk surfaces, served from equipmentwatchapi.com with a documented sandbox host, and authenticated with an x-api-key header issued through a request-an-API-key form.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/equipmentwatch/refs/heads/main/apis.yml)
+**Areas:** Construction · Equipment · Rental Rates · Valuation · Heavy Equipment · Equipment Data · Market Data
 
-## Scope
+## Equipmentwatch on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Equipmentwatch is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/equipmentwatch/](https://apis.io/providers/equipmentwatch/)** — or go straight to one of the APIs or properties below.
 
-## Tags:
+### APIs (9)
 
- - Construction, Equipment, Rental Rates, Valuation, Heavy Equipment
+- [EquipmentWatch Market Data API](https://apis.io/apis/equipmentwatch/market-data/) — Raw equipment sales activity (auction and resale transactions) and market-derived utilization and popularity benchmarks for the heavy equipment industry.…
+- [EquipmentWatch Integration API](https://apis.io/apis/equipmentwatch/integration/) — Read and write access to user-saved asset and group data inside the EquipmentWatch application, allowing saved models and groups to be moved into and out of…
+- [Equipmentwatch Bulk API](https://apis.io/apis/equipmentwatch/equipmentwatch-bulk-api/) — The Bulk API from Equipmentwatch — 2 operation(s) for bulk.
+- [Equipmentwatch Cost API](https://apis.io/apis/equipmentwatch/equipmentwatch-cost-api/) — The Cost API from Equipmentwatch — 3 operation(s) for cost.
+- [Equipmentwatch Rental API](https://apis.io/apis/equipmentwatch/equipmentwatch-rental-api/) — The Rental API from Equipmentwatch — 4 operation(s) for rental.
+- [Equipmentwatch Specifications API](https://apis.io/apis/equipmentwatch/equipmentwatch-specifications-api/) — The Specifications API from Equipmentwatch — 2 operation(s) for specifications.
+- [Equipmentwatch Taxonomy API](https://apis.io/apis/equipmentwatch/equipmentwatch-taxonomy-api/) — The Taxonomy API from Equipmentwatch — 6 operation(s) for taxonomy.
+- [Equipmentwatch Values API](https://apis.io/apis/equipmentwatch/equipmentwatch-values-api/) — The Values API from Equipmentwatch — 6 operation(s) for values.
+- [Equipmentwatch Verification API](https://apis.io/apis/equipmentwatch/equipmentwatch-verification-api/) — The Verification API from Equipmentwatch — 1 operation(s) for verification.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-16
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### EquipmentWatch Taxonomy API
+Model Context Protocol servers that expose the API to agents.
 
-Foundational API providing access to EquipmentWatch's manufacturer and model database, covering the taxonomy used across the broader API suite.
+- [equipmentwatch-mcp.yml](https://apis.io/servers/equipmentwatch/equipmentwatch-mcp-yml/)
 
-**Human URL:** [https://www.equipmentwatch.com/api/](https://www.equipmentwatch.com/api/)
+#### Overlays (1)
 
-#### Tags
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- Taxonomy, Manufacturers, Models
+- [Equipmentwatch Api Overlay](https://apis.io/overlays/equipmentwatch/equipmentwatch-api-overlay/)
 
-### EquipmentWatch Specs API
+#### Security (2)
 
-Access to the industry's most comprehensive database of rich machine specifications for construction and heavy equipment.
+Authentication, trust centre, and vulnerability disclosure.
 
-**Human URL:** [https://www.equipmentwatch.com/api/](https://www.equipmentwatch.com/api/)
+- [Equipmentwatch Authentication](https://apis.io/security/equipmentwatch/equipmentwatch-authentication/)
+- [Equipmentwatch Domain Security](https://apis.io/security/equipmentwatch/equipmentwatch-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Specifications, Equipment
+Published plans, tiers and prices.
 
-### EquipmentWatch Verification API
+- [Equipmentwatch Plans Pricing](https://apis.io/plans/equipmentwatch/equipmentwatch-plans-pricing/)
 
-Serial number verification API supporting approximately 30,000 models of construction and heavy equipment.
+#### Rate limits (1)
 
-**Human URL:** [https://www.equipmentwatch.com/api/](https://www.equipmentwatch.com/api/)
+Published request limits.
 
-#### Tags
+- [Equipmentwatch Rate Limits](https://apis.io/rate-limits/equipmentwatch/equipmentwatch-rate-limits/)
 
-- Verification, Serial Numbers
+#### FinOps (1)
 
-### EquipmentWatch Costs API
+What the API costs to run, by operation.
 
-Ownership and operating cost recovery rates derived from the Rental Rate Blue Book.
+- [Equipmentwatch Finops](https://apis.io/finops/equipmentwatch/equipmentwatch-finops/)
 
-**Human URL:** [https://www.equipmentwatch.com/api/](https://www.equipmentwatch.com/api/)
+## Where to find this API
 
-#### Tags
-
-- Costs, Ownership Costs, Rental Rates
-
-### EquipmentWatch Values API
-
-Current market values and pricing data for heavy equipment, supporting valuation, appraisal, and resale workflows.
-
-**Human URL:** [https://www.equipmentwatch.com/api/](https://www.equipmentwatch.com/api/)
-
-#### Tags
-
-- Valuation, Market Values, Pricing
-
-### EquipmentWatch Retail Rental API
-
-National, regional, and rental-house specific equipment rental rates.
-
-**Human URL:** [https://www.equipmentwatch.com/api/](https://www.equipmentwatch.com/api/)
-
-#### Tags
-
-- Rental Rates, Retail
-
-### EquipmentWatch Market Data API
-
-Raw equipment sales activity and market-derived utilization benchmarks for the heavy equipment industry.
-
-**Human URL:** [https://www.equipmentwatch.com/api/](https://www.equipmentwatch.com/api/)
-
-#### Tags
-
-- Market Data, Sales, Utilization
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.equipmentwatch.com/)
-- [APIs](https://www.equipmentwatch.com/api/)
+- [Documentation](https://docs.equipmentwatchapi.com/)
+- [API reference](https://docs.equipmentwatchapi.com/)
+- [Sign up](https://share.hsforms.com/12W-aoSkmR5eYntgAyyiPsAqjl7f)
+- [Support](https://equipmentwatch.com/contact-us/)
+- [Blog](https://equipmentwatch.com/blog/feed/)
+- [Terms of service](https://equipmentwatch.com/legal/terms-of-service/)
+- [Privacy policy](https://equipmentwatch.com/legal/website-terms-and-privacy-notice/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 36.5** — thin · rubric 0.24.0 · scored 2026-10-17
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 44.6 |
+| Contract governance | 4.5 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 47.0 |
+| Access clarity | 34.2 |
+
+**Agent readiness 25.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 28.7** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/equipmentwatch/](https://apis.io/providers/equipmentwatch/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Equipmentwatch: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/equipmentwatch/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
